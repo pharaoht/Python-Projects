@@ -1,0 +1,22 @@
+1. Generate Random word
+| |
+V V
+2. Add blank spaces for every letter in word
+| |
+V V
+3. Ask the user to guess a letter
+| |
+V V
+4. Is the gussed letter in the word? No -----> 5. Lose a life --> 6. Have they run out of lives? ---> No ---> Return to step 1
+                                                                     |
+Yes                                                                  Yes ---> 7. ***Game Over***      
+| |
+V V
+5. Replace the blank with letter 
+| |
+V V
+6. Are all the Blanks filled? --- Yes ---> 7. ***Game over***
+| |
+V V
+No
+Return to step 1
