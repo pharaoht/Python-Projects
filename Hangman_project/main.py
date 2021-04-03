@@ -10,11 +10,15 @@ display = []  # list
 wrong_letters = []
 for letter in range(word_length):
     display += "_"
+
+
 print(display)
+print(logo)
 
 end_of_game = False
 while not end_of_game:
     guess = input("Guess a letter: ").lower()
+
     print(". . .")
 
     if guess in display:
@@ -29,6 +33,7 @@ while not end_of_game:
         letter = chosen_word[position]
         if letter == guess:
             display[position] = letter
+
     print(". . .")
     print(display)
 
@@ -42,6 +47,7 @@ while not end_of_game:
         print(". . .")
         if lives == 0:
             end_of_game = True
+            print(f"The correct word was {chosen_word}")
             print("You lose")
 
     if "_" not in display:
