@@ -30,6 +30,6 @@ def decrypt(cipher_text, userShiftInput2):
 
 
 if userDirectionInput == "encode":
-    encrypt(userTextInput, userShiftInput)
+    encrypt(userTextInput1=userTextInput, userShiftInput1=userShiftInput)
 elif userDirectionInput == "decode":
-    decrypt(userTextInput, userShiftInput)
+    decrypt(cipher_text1=userTextInput, userShiftInput2=userShiftInput)
