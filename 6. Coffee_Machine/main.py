@@ -7,4 +7,3 @@ money_machine = MoneyMachine()
 
 coffee_maker.report()
 money_machine.report()
-coo = 0
