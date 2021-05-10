@@ -11,6 +11,9 @@
 
 import turtle as turtle_module
 import random
+screen = turtle_module.Screen()
+screen.setup(width=500, height=500)
+
 turtle_module.colormode(255)
 tim = turtle_module
 color_list = [(232, 240, 235), (225, 233, 238), (237, 34, 109), (153, 24, 65), (240, 73, 34), (7, 147, 92), (218, 170, 46), (178, 159, 44),
@@ -35,5 +38,4 @@ for dot_num in range(1, num_of_dots):
         tim.setheading(0)
 
 
-screen = turtle_module.Screen()
 screen.exitonclick()
