@@ -1,5 +1,6 @@
 from turtle import Turtle, Screen
-
+# when passing functions as arguments we dont put the () because it was run it before the event listener is triggered
+# Higher order functions, a function that can work with other functions
 tim = Turtle()
 screen = Screen()
 
@@ -30,8 +31,7 @@ def clear():
 
 
 screen.listen()
-# when passing functions as arguments we dont put the () because it was run it before the event listener is triggered
-# Higher order functions, a function that can work with other functions
+
 screen.onkey(key="w", fun=move_forwards)
 screen.onkey(key="s", fun=move_backwards)
 screen.onkey(key="a", fun=move_left)
