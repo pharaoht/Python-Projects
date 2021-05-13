@@ -10,6 +10,11 @@ screen.setup(width=600, height=400)
 screen.bgcolor("black")
 screen.title("My Snake Game")
 snake = Snake()
+screen.listen()
+screen.onkey(snake.up, "Up")
+screen.onkey(snake.down, "Down")
+screen.onkey(snake.left, "Left")
+screen.onkey(snake.right, "Right")
 
 while game_is_on:
     screen.update()
