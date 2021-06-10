@@ -1,11 +1,12 @@
-from turtle import Turtle, Screen
+from turtle import Turtle, Screen, Paddle
 
 screen = Screen()
 screen.bgcolor("black")
 screen.setup(width=800, height=600)
 screen.title("Pong")
 screen.tracer(0)
-paddle = Turtle()
+r_paddle = Paddle((350, 0))
+l_paddle = Paddle((-350, 0))
 
 
 def go_up():
