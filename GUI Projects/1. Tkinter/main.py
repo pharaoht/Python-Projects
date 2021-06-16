@@ -16,6 +16,7 @@ def button_clicked():
 
 button = Button(text="Click me", command=button_clicked)
 button.pack()
+button.update()
 
 input = Entry()
 input.pack()
