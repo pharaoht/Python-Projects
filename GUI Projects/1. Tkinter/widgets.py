@@ -52,5 +52,6 @@ checkbutton = Checkbutton(
     text="Is on?", variable=checked_state, command=checkbutton_used)
 checked_state.get()
 checkbutton.pack()
+...
 
 window.mainloop()
