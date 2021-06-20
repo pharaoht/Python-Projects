@@ -21,7 +21,7 @@ class User(models.Model):
     password = models.CharField(max_length=30)
     phone = models.CharField(max_length=10, null=True)
     photo = models.ImageField(upload_to='uploads/', null=True, blank=True)
-    address = models.ForeignKey(Address, on_delete=models.CASCADE)
+    address = models.ForeignKey(Address, on_delete=models.CASCADE, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

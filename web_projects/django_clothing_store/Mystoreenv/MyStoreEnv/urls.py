@@ -22,7 +22,10 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('StoreApp.urls'))
+
+    # Rest Framework APIs
+    path('api/', include('StoreApp.urls', 'users_api'))
+
 
 ]
 
