@@ -20,10 +20,32 @@ class User(models.Model):
     email = models.EmailField(max_length=254, unique=True)
     password = models.CharField(max_length=30)
     phone = models.CharField(max_length=10, null=True)
-    photo = models.ImageField(upload_to='uploads/', null=True, blank=True)
+    #photo = models.ImageField(upload_to='uploads/', null=True)
     address = models.ForeignKey(Address, on_delete=models.CASCADE, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+
+class Categories(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+
+    def __unicode__(self):
+        return self.name
+
+
+class Product(models.Model):
+    name = models.CharField(max_length=50)
+    price = models.DecimalField(max_digits=6, decimal_places=2)
+    quantity = models.IntegerField()
+    # photo = models.ImageField(upload_to='products/', null=True)
+    # phot2 = models.ImageField(upload_to='products/', null=True)
+    # photo3 = models.ImageField(upload_to='products/', null=True)
+    description = models.TextField()
+    category = models.ForeignKey(
+        Categories, related_name='category', on_delete=models.SET_NULL, null=True)
+
+    def __unicode__(self):
+        return self.name
 
 
 class UserManager(models.Manager):
