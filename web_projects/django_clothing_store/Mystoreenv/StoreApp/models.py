@@ -26,7 +26,7 @@ class User(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
 
-class Categories(models.Model):
+class Category(models.Model):
     name = models.CharField(max_length=100, unique=True)
 
     def __unicode__(self):
@@ -42,10 +42,14 @@ class Product(models.Model):
     # photo3 = models.ImageField(upload_to='products/', null=True)
     description = models.TextField()
     category = models.ForeignKey(
-        Categories, related_name='category', on_delete=models.SET_NULL, null=True)
+        Category, related_name='category', on_delete=models.SET_NULL, null=True)
 
     def __unicode__(self):
         return self.name
+
+
+class Order(models.Model):
+    pass
 
 
 class UserManager(models.Manager):

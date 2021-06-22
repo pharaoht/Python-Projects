@@ -4,8 +4,9 @@ from rest_framework.serializers import ModelSerializer
 from rest_framework import serializers
 from .models import User
 from .models import Product
-from .models import Categories
+from .models import Category
 from django.contrib.auth.hashers import make_password
+from django.db import models
 
 # Model serializer, less customizable but more simple to setup
 
@@ -22,7 +23,7 @@ class UserSerializer(ModelSerializer):
 class CategorySerializer(ModelSerializer):
 
     class Meta:
-        model = Categories
+        model = Category
         fields = [
             'id', 'name'
         ]

@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from .models import User
 from .models import Address
 from .models import Product
-from .models import Categories
+from .models import Category
 from .serializers import UserSerializer
 from .serializers import ProductSerializer
 from .serializers import CategorySerializer
@@ -55,3 +55,13 @@ def add_new_category(request):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET'])
+def get_all_products(request):
+    pass
+
+
+@api_view(['GET'])
+def get_all_shirts(request):
+    pass
