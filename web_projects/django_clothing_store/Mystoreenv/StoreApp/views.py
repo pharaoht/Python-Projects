@@ -33,18 +33,19 @@ def create_new_user(request):
 
 @api_view(['POST', ])
 def add_new_product(request):
-    cate = Categories.objects.get(id=request.data['category'])
+    print(request.data['category'])
+    cate = Category.objects.get(id=request.data['category'])
 
     if request.method == "POST":
         serializer2 = ProductSerializer(data=request.data)
         if serializer2.is_valid():
-            new_product = Product.objects.create(
-                category=cate, name=request.data['name'], price=request.data['price'], quantity=request.data['quantity'],
-                description=request.data['description'])
-            new_product.save()
-            serializer = ProductSerializer(new_product)
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            # new_product = Product.objects.create(
+            #     category=cate, name=request.data['name'], price=request.data['price'], quantity=request.data['quantity'],
+            #     description=request.data['description'], photo=request.data['photo'], photo2=request.data['photo2'],
+            #     photo3=request.data['photo3'],)
+            serializer2.save()
+            return Response(serializer2.data, status=status.HTTP_201_CREATED)
+    return Response(serializer2.errors)
 
 
 @api_view(['POST'])
@@ -59,9 +60,31 @@ def add_new_category(request):
 
 @api_view(['GET'])
 def get_all_products(request):
-    pass
+    try:
+        products = Product.objects.all()
+    except products.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    serializer = ProductSerializer(products, many=True)
+    return Response(serializer.data)
+
+# going to make this route dynamic to find item based off what is click
 
 
 @api_view(['GET'])
 def get_all_shirts(request):
-    pass
+    try:
+        shirts = Product.objects.filter(category_id=2)
+    except shirts.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    serializer = ProductSerializer(shirts, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def get_all_categories(request):
+    try:
+        categories = Category.objects.all()
+    except categories.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    serializer = CategorySerializer(categories, many=True)
+    return Response(serializer.data)

@@ -12,8 +12,6 @@ class Address(models.Model):
 
 
 class User(models.Model):
-    # ID is added by default in Django
-    # Add validator to not allow special characters
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     middle_int = models.CharField(max_length=1, null=True)
@@ -24,6 +22,8 @@ class User(models.Model):
     address = models.ForeignKey(Address, on_delete=models.CASCADE, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    # add is admin field
+    # Add validator to not allow special characters
 
 
 class Category(models.Model):
@@ -37,9 +37,9 @@ class Product(models.Model):
     name = models.CharField(max_length=50)
     price = models.DecimalField(max_digits=6, decimal_places=2)
     quantity = models.IntegerField()
-    # photo = models.ImageField(upload_to='products/', null=True)
-    # phot2 = models.ImageField(upload_to='products/', null=True)
-    # photo3 = models.ImageField(upload_to='products/', null=True)
+    photo = models.ImageField(upload_to='products/', null=True)
+    phot2 = models.ImageField(upload_to='products/', null=True)
+    photo3 = models.ImageField(upload_to='products/', null=True)
     description = models.TextField()
     category = models.ForeignKey(
         Category, related_name='category', on_delete=models.SET_NULL, null=True)
