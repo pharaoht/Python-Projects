@@ -6,6 +6,17 @@ const AddProduct = () =>{
     const[allCategories, setAllCategories] = useState([])
     const[deleteState, setDeleteState] = useState(false)
 
+    const[formErrors, setFormErrors] = useState({
+        name : "",
+        price: "",
+        quantity:"",
+        photo:"",
+        photo2:"",
+        photo3:"",
+        description:"",
+        category:""
+    })
+
         const[formInfo, setFormInfo] = useState({
         name : "",
         price: "",
@@ -40,16 +51,20 @@ const AddProduct = () =>{
         console.log(formInfo)
         axios.post("http://localhost:8000/api/add-new-product/", formInfo)
         .then(res=>{
-            console.log(res.data)
-        }).catch(err => console.log(err))
+            console.log(res)
+        }).catch(err => {
+            setFormErrors(err.response.data)
+            console.log(formErrors)
+        })
     }
 
 
     return (
         <div className="container">
             <h1>What Product do you want to add?</h1>
-            <form onSubmit={submitHandler}>
+            <form onSubmit={submitHandler} enctype="multipart/form-data">
             <span>Name of item</span>
+            <p className="text-danger" role="alert">{formErrors ? formErrors.name : "" }</p>
             <p><input type="text" name="name" onChange={changeHandler}/></p>
             <span>Price</span>
             <p>$<input type="number" step="0.01" min="0.01"name="price" onChange={changeHandler}/></p>

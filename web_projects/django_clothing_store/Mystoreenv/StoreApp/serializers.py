@@ -7,6 +7,7 @@ from .models import Product
 from .models import Category
 from django.contrib.auth.hashers import make_password
 from django.db import models
+from rest_framework.validators import UniqueValidator
 
 # Model serializer, less customizable but more simple to setup
 
@@ -33,6 +34,11 @@ class ProductSerializer(ModelSerializer):
 
     class Meta:
         model = Product
+        slug = NameField(
+            max_length=100,
+            validators=[UniqueValidator(queryset=BlogPost.objects.all())]
+        )
+
         fields = [
             'id', 'name', 'price', 'quantity', 'description', "category"
         ]

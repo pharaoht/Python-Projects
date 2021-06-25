@@ -39,13 +39,9 @@ def add_new_product(request):
     if request.method == "POST":
         serializer2 = ProductSerializer(data=request.data)
         if serializer2.is_valid():
-            # new_product = Product.objects.create(
-            #     category=cate, name=request.data['name'], price=request.data['price'], quantity=request.data['quantity'],
-            #     description=request.data['description'], photo=request.data['photo'], photo2=request.data['photo2'],
-            #     photo3=request.data['photo3'],)
             serializer2.save()
             return Response(serializer2.data, status=status.HTTP_201_CREATED)
-    return Response(serializer2.errors)
+    return Response(data=serializer2.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['POST'])
@@ -88,3 +84,5 @@ def get_all_categories(request):
         return Response(status=status.HTTP_404_NOT_FOUND)
     serializer = CategorySerializer(categories, many=True)
     return Response(serializer.data)
+
+#Response(data, status=None, template_name=None, headers=None, content_type=None)
