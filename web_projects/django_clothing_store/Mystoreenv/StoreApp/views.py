@@ -1,10 +1,10 @@
 from rest_framework import status
 from rest_framework.response import Response
-from .models import User
+# from .models import User
 from .models import Address
 from .models import Product
 from .models import Category
-from .serializers import UserSerializer
+# from .serializers import UserSerializer
 from .serializers import ProductSerializer
 from .serializers import CategorySerializer
 from rest_framework.decorators import api_view
