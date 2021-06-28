@@ -34,13 +34,9 @@ class ProductSerializer(ModelSerializer):
 
     class Meta:
         model = Product
-        slug = NameField(
-            max_length=100,
-            validators=[UniqueValidator(queryset=BlogPost.objects.all())]
-        )
 
         fields = [
-            'id', 'name', 'price', 'quantity', 'description', "category"
+            'id', 'name', 'price', 'quantity', 'description', "category", 'photo', 'phot02', 'photo3'
         ]
 
         depth = 1

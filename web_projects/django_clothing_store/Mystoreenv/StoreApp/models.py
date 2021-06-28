@@ -34,15 +34,15 @@ class Category(models.Model):
 
 
 class Product(models.Model):
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=50, unique=True)
     price = models.DecimalField(max_digits=6, decimal_places=2)
     quantity = models.IntegerField()
-    photo = models.ImageField(upload_to='products/', blank=True)
-    phot2 = models.ImageField(upload_to='products/', blank=True)
-    photo3 = models.ImageField(upload_to='products/', blank=True)
+    photo = models.ImageField(upload_to='media/', blank=True)
+    phot02 = models.ImageField(upload_to='media/', blank=True)
+    photo3 = models.ImageField(upload_to='media/', blank=True)
     description = models.TextField()
     category = models.ForeignKey(
-        Category, related_name='category', on_delete=models.SET_NULL, null=True)
+        Category, related_name='category', on_delete=models.PROTECT, null=True)
 
     def __unicode__(self):
         return self.name

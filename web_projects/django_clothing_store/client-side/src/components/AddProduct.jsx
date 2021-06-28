@@ -45,15 +45,21 @@ const AddProduct = () =>{
             })
     }
 
+    const header = {
+        "enctype":"multipart/form-data"
+    }
+
 
     const submitHandler = (e) =>{
         e.preventDefault()
         console.log(formInfo)
-        axios.post("http://localhost:8000/api/add-new-product/", formInfo)
+        axios.post("http://localhost:8000/api/add-new-product/", formInfo,{
+            headers: header,
+        })
         .then(res=>{
             console.log(res)
         }).catch(err => {
-            setFormErrors(err.response.data)
+            setFormErrors(err.response)
             console.log(formErrors)
         })
     }
@@ -62,7 +68,7 @@ const AddProduct = () =>{
     return (
         <div className="container">
             <h1>What Product do you want to add?</h1>
-            <form onSubmit={submitHandler} enctype="multipart/form-data">
+            <form onSubmit={submitHandler} enctype='multipart/form-data' >
             <span>Name of item</span>
             <p className="text-danger" role="alert">{formErrors ? formErrors.name : "" }</p>
             <p><input type="text" name="name" onChange={changeHandler}/></p>
