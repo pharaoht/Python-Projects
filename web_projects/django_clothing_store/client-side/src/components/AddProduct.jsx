@@ -52,7 +52,7 @@ const AddProduct = () =>{
 
     const submitHandler = (e) =>{
         e.preventDefault()
-        console.log(formInfo)
+       
         axios.post("http://localhost:8000/api/add-new-product/", formInfo,{
             headers: header,
         })
