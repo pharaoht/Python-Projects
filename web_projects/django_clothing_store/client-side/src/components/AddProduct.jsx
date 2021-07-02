@@ -60,7 +60,7 @@ const AddProduct = () =>{
             console.log(res)
         }).catch(err => {
             setFormErrors(err.response)
-            console.log(formErrors)
+            
         })
     }
 
