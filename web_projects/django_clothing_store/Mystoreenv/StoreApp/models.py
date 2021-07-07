@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
 
 class Address(models.Model):
@@ -20,18 +20,23 @@ class UserManager(BaseUserManager):
                           first_name=first_name, last_name=last_name, **other_fields)
         return user
 
-    def create_superuser(self):
-        pass
+    def create_superuser(self, email, user_name, first_name, last_name, password, **other_fields):
+        other_fields.setdefault('is_staff', True)
+        if other_fields.get('is_staff') is not True:
+            raise ValueError('Admin user must be set to is_staff')
+        return self.create_user(email, user_name, first_name, password, last_name, **other_fields)
 
 
-class NewUser(AbstractBaseUser, PermissionsMixin):
+class NewUser(AbstractBaseUser):
     email = models.EmailField(unique=True)
     user_name = models.CharField(max_length=150, unique=True)
     first_name = models.CharField(max_length=150)
     last_name = models.CharField(max_length=150)
-    address = models.ForeignKey(
-        Address, related_name='address', on_delete=models.CASCADE, null=True)
+    # address = models.ForeignKey(
+    #     Address, related_name='address', on_delete=models.CASCADE, null=True)
     is_staff = models.BooleanField(default=False)
+
+    objects = UserManager()
 
     USERNAME_FIELD = 'user_name'
 
