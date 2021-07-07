@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 
 
 class Address(models.Model):
@@ -11,61 +12,52 @@ class Address(models.Model):
         default='United States', editable=False, max_length=13)
 
 
-# class User(models.Model):
-#     first_name = models.CharField(max_length=30)
-#     last_name = models.CharField(max_length=30)
-#     middle_int = models.CharField(max_length=1, null=True)
-#     email = models.EmailField(max_length=254, unique=True)
-#     password = models.CharField(max_length=30)
-#     phone = models.CharField(max_length=10, null=True)
-#     # photo = models.ImageField(upload_to='uploads/', null=True)
-#     address = models.ForeignKey(Address, on_delete=models.CASCADE, null=True)
-#     created_at = models.DateTimeField(auto_now_add=True)
-#     updated_at = models.DateTimeField(auto_now=True)
-#     # add is admin field
-#     # Add validator to not allow special characters
+class UserManager(BaseUserManager):
+
+    def create_user(self, email, user_name, first_name, last_name, **other_fields):
+        email = self.normalize_email(email)
+        user = self.model(email=email, user_name=user_name,
+                          first_name=first_name, last_name=last_name, **other_fields)
+        return user
+
+    def create_superuser(self):
+        pass
+
+
+class NewUser(AbstractBaseUser, PermissionsMixin):
+    email = models.EmailField(unique=True)
+    user_name = models.CharField(max_length=150, unique=True)
+    first_name = models.CharField(max_length=150)
+    last_name = models.CharField(max_length=150)
+    address = models.ForeignKey(
+        Address, related_name='address', on_delete=models.CASCADE, null=True)
+    is_staff = models.BooleanField(default=False)
+
+    USERNAME_FIELD = 'user_name'
 
 
 class Category(models.Model):
-    name = models.CharField(
-        max_length=100,  unique=True)
+    name = models.CharField(max_length=255, db_index=True, unique=True)
+    slug = models.SlugField(max_length=255, unique=True)
+
+    class Meta:
+        verbose_name_plural = 'categories'
 
     def __unicode__(self):
         return self.name
-
-
-class Gender(models.Model):
-    sex = models.CharField(
-        max_length=10,  unique=True)
-
-    def __unicode__(self):
-        return self.sex
 
 
 class Product(models.Model):
+    category = models.ForeignKey(
+        Category, related_name='category', on_delete=models.PROTECT, null=True)
     name = models.CharField(max_length=50, unique=True)
     price = models.DecimalField(max_digits=6, decimal_places=2)
     quantity = models.IntegerField()
-    photo = models.ImageField(upload_to='media/', blank=True)
-    phot02 = models.ImageField(upload_to='media/', blank=True)
+    photo1 = models.ImageField(upload_to='media/', blank=True)
+    photo2 = models.ImageField(upload_to='media/', blank=True)
     photo3 = models.ImageField(upload_to='media/', blank=True)
     description = models.TextField()
-    category = models.ForeignKey(
-        Category, related_name='category', on_delete=models.PROTECT, null=True)
-    gender = models.ForeignKey(
-        Gender, related_name='gender', on_delete=models.PROTECT)
+    in_stock = models.BooleanField(default=True)
 
     def __unicode__(self):
         return self.name
-
-
-class Order(models.Model):
-    pass
-
-
-class UserManager(models.Manager):
-    pass
-
-
-class AddressManager(models.Model):
-    pass
