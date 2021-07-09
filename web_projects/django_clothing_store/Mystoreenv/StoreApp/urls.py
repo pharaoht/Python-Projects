@@ -1,5 +1,5 @@
 from django.urls import path
-from . import views
+from . import views, AllMaleProducts
 
 app_name = 'StoreApp'
 
@@ -10,6 +10,7 @@ urlpatterns = [
     path('add-new-category/', views.add_new_category),
     path('get-all-products/', views.get_all_products),
     path('get-all-t-shirts/', views.get_all_shirts),
-    path('get-all-categories/', views.get_all_categories)
+    path('get-all-categories/', views.get_all_categories),
+    path('get-all-male-products/', AllMaleProducts.as_view())
 
 ]

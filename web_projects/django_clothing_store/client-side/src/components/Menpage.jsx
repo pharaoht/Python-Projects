@@ -3,6 +3,7 @@ import axios from 'axios'
 import { Link, navigate } from '@reach/router'
 import '../css/Menspage.css';
 
+
 const Menpage = () =>{
     
     const[allCategories, setAllCategories] = useState([])
@@ -18,7 +19,7 @@ const Menpage = () =>{
         axios.get("http://localhost:8000/api/get-all-products/")
         .then(res =>{
             setAllProducts(res.data)
-            console.log(setAllProducts)
+            console.log(res.data)
         }).catch(err => console.log(err))
     },[deleteState])
 
@@ -31,17 +32,17 @@ const Menpage = () =>{
                 <div className="sidebar">
                     <ul>
                     {allCategories.map((currentItem, idx) =>{
-                        return <li id={currentItem.id} className="cate-list">{currentItem.name}</li>
+                        return <li key={currentItem.id} className="cate-list">{currentItem.name}</li>
                     })}
                     </ul>
                 </div>
                 <div className="main-container">
                     <ul className="products"> 
-                        {allProducts.map((currentItem,idx) =>{
+                        {allProducts.map((currentItem) =>{
                             return <li className="list-prod" id={currentItem.id}>
                                 <div className="item">
                                     <div className="imageitem">
-                                        <img src={currentItem.photo} alt="item" />
+                                        <img src={'http://127.0.0.1:8000' + currentItem.photo1} alt="item" height="200" width="200" />
                                     </div>
                                     <div className="itemfooter">
                                         <p>{currentItem.name} - {currentItem.price}</p>
