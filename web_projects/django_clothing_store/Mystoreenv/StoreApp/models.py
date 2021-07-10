@@ -79,7 +79,6 @@ class Product(models.Model):
     description = models.TextField()
     in_stock = models.BooleanField(default=True)
     objects = models.Manager()
-    maleProductObjects = ProductObjects()
 
     def __str__(self):
         return self.name
