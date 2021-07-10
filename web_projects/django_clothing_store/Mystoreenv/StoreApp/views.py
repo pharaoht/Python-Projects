@@ -1,17 +1,22 @@
 from rest_framework import status, generics
 from rest_framework.response import Response
-from .models import NewUser
-from .models import Product
-from .models import Category
-from .serializers import UserSerializer
-from .serializers import ProductSerializer
-from .serializers import CategorySerializer
+from .models import NewUser, Category, Product
+from .serializers import UserSerializer, ProductSerializer, CategorySerializer
 from rest_framework.decorators import api_view
+from rest_framework.views import APIView
+from rest_framework.permissions import AllowAny
 
 
-class AllMaleProducts(generics.ListCreateAPIView):
-    queryset = Product.objects.filter(gender='male')
-    serializer_class = ProductSerializer
+class CustomUserCreate(APIView):
+    permission_classes = [AllowAny]
+
+    def post(self, request):
+        reg_serializer = UserSerializer(data=request.data)
+        if reg_serializer.is_valid():
+            newuser = reg_serializer.save()
+            if newuser:
+                return Response(status=status.HTTP_201_CREATED)
+        return Response(reg_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['GET', ])

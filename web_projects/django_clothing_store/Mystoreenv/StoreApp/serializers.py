@@ -14,10 +14,16 @@ from rest_framework.validators import UniqueValidator
 class UserSerializer(ModelSerializer):
     class Meta:
         model = NewUser
-        fields = [
-            'id', 'first_name', 'last_name', 'middle_int', 'email', 'password', 'phone', 'address', 'created_at', 'updated_at'
-        ]
-    validate_password = make_password
+        fields = ('first_name', 'last_name', 'email', 'password')
+        extra_kwargs = {'password': {'write_only': True}}
+
+    def create(self, validated_data):
+        passowrd = validated_data.pop('password', None)
+        instance = self.Meta.model(**validated_data)
+        if passowrd is not None:
+            instance.set_password(passowrd)
+        instance.save()
+        return instance
 
 
 class CategorySerializer(ModelSerializer):
