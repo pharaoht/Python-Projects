@@ -1,0 +1,54 @@
+.btn-none {
+  border: none;
+  background-color: white;
+}
+
+.ReactModal__Content {
+  margin: 100px;
+  padding: 0% !important;
+  background: #f5f9ff important;
+}
+
+.outline {
+  padding: 2%;
+  display: flex;
+  justify-content: center;
+}
+
+.sign-up {
+  border: 1px;
+  text-align: center;
+}
+
+.login {
+  border: 1px;
+  text-align: center;
+}
+
+.vl {
+  border-left: 1px solid black;
+  height: 400px;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+footer {
+  margin-top: 5%;
+}
+
+p.copyright {
+  position: absolute;
+  width: 100%;
+  line-height: 40px;
+  font-size: 0.7em;
+  text-align: center;
+  bottom: 0;
+}
+
+.sign-up-text {
+  text-align: left;
+}
+
+.submit-btn {
+  margin-top: 20px;
+}
