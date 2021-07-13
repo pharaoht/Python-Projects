@@ -1,10 +1,11 @@
 from rest_framework import status, generics
 from rest_framework.response import Response
-from .models import NewUser, Category, Product
-from .serializers import UserSerializer, ProductSerializer, CategorySerializer
+from .models import NewUser, Category, Product, Gender
+from .serializers import UserSerializer, ProductSerializer, CategorySerializer, GenderSerializer
 from rest_framework.decorators import api_view
 from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny
+from django.views.generic import ListView
 
 
 class CustomUserCreate(APIView):
@@ -31,6 +32,14 @@ class CreateProduct(APIView):
             if newproduct:
                 return Response(status=status.HTTP_201_CREATED)
         return Response(data=reg_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class GetAllMaleProducts(ListView):
+    queryset = Gender.objects.filter(gender=1)
+    serializer_class = GenderSerializer
+
+    def getdara(self):
+        return serializer_class
 
 
 @ api_view(['POST', ])
