@@ -50,7 +50,7 @@ class ProductSerializer(ModelSerializer):
         model = Product
 
         fields = [
-            'id', 'name', 'price', 'quantity', 'description', "category", 'photo1', 'photo2', 'photo3'
+            'id', 'name', 'price', 'quantity', 'description', "category", 'photo1', 'photo2', 'photo3', 'gender'
         ]
 
         depth = 1

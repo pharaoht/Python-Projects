@@ -14,22 +14,21 @@ from phone_field import PhoneField
 
 class UserManager(BaseUserManager):
 
-    def create_user(self, email, user_name, first_name, last_name, phone_number, **other_fields):
+    def create_user(self, email, first_name, last_name, phone_number, **other_fields):
         email = self.normalize_email(email)
-        user = self.model(email=email, user_name=user_name,
+        user = self.model(email=email,
                           first_name=first_name, last_name=last_name, phone_number=phone_number, **other_fields)
         return user
 
-    def create_superuser(self, email, user_name, first_name, last_name, password, phone_number, **other_fields):
+    def create_superuser(self, email, first_name, last_name, password, phone_number, **other_fields):
         other_fields.setdefault('is_staff', True)
         if other_fields.get('is_staff') is not True:
             raise ValueError('Admin user must be set to is_staff')
-        return self.create_user(email, user_name, first_name, password, last_name, phone_number, **other_fields)
+        return self.create_user(email,  first_name, password, last_name, phone_number, **other_fields)
 
 
 class NewUser(AbstractBaseUser):
     email = models.EmailField(unique=True)
-    user_name = models.CharField(max_length=150, unique=True)
     first_name = models.CharField(max_length=150)
     last_name = models.CharField(max_length=150)
     phone_number = PhoneField(blank=True, help_text='Contact phone number')
@@ -38,8 +37,6 @@ class NewUser(AbstractBaseUser):
     is_staff = models.BooleanField(default=False)
 
     objects = UserManager()
-
-    USERNAME_FIELD = 'user_name'
 
 
 class Category(models.Model):

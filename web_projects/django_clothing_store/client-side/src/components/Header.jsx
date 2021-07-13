@@ -21,12 +21,17 @@ import Container from '@material-ui/core/Container';
 Modal.setAppElement('#root')
 export default function Header(){
       const [modalIsOpen, setmodalIsOpen] = useState(false)
+
+      const[formErrors, setFormErrors] = useState({
+       email: "",
+    })
       
       const history = useHistory();
       //object freeze, once the user submit info it cannot be changed
       const initialFormData = Object.freeze({
         email:'',
-        username:'',
+        first_name:'',
+        last_name:'',
         password:'',
       });
 
@@ -47,39 +52,19 @@ export default function Header(){
         axiosInstance
         .post(`register/`, {
             email:formData.email,
-            user_name: formData.username,
-            password:formData.password
+            password:formData.password,
+            first_name:formData.first_name,
+            last_name:formData.last_name
+            
         })
         .then((res) =>{
-            history.push('/login')
-        })}
-
-        function Copyright() {
-          return (
-            <Typography variant="body2" color="textSecondary" align="center">
-              {'Copyright © '}{' '}
-              {new Date().getFullYear()}
-              {'.'}
-            </Typography>
-          )};
-
-        const useStyles = makeStyles((theme) => ({
-        paper: {
-          marginTop: theme.spacing(8),
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        },
-        form: {
-          width: '100%', // Fix IE 11 issue.
-          marginTop: theme.spacing(1),
-        },
-        submit: {
-          margin: theme.spacing(3, 0, 2),
-        },
-        }));
-
-        const classes = useStyles();
+          setmodalIsOpen(false)
+            history.push('/')
+            
+        }).catch(err =>{
+          setFormErrors(err.response.data)
+          console.log(formErrors)
+        } )}
   return (
     <>
     
@@ -131,14 +116,15 @@ export default function Header(){
               <h2>Sign Up</h2>
               <form>
                 <p className="sign-up-text">First Name</p>
-                <input type='text' className="form-input"/>
+                <input type='text' className="form-input" name="first_name" onChange={handleChange}/>
                 <p className="sign-up-text">Last Name</p>
-                <input type='text' className="form-input"/>
+                <input type='text' className="form-input" name="last_name" onChange={handleChange}/>
                 <p className="sign-up-text">Email</p>
-                <input type='text' className="form-input"/>
+                <p className="text-danger" role="alert">{formErrors ? formErrors.email : "" }</p>
+                <input type='text' className="form-input" name="email" onChange={handleChange}/>
                 <p className="sign-up-text">Password</p>
-                <input type='text' className="form-input"/>
-                <p><button type="submit" className="submit-btn">Sign Up!</button></p>
+                <input type='text' className="form-input" name="password" onChange={handleChange}/>
+                <p><button type="submit" className="submit-btn" onClick={handleSumbit}>Sign Up!</button></p>
                 
               </form>
             </div>

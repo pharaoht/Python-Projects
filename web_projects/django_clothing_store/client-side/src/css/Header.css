@@ -4,9 +4,11 @@
 }
 
 .ReactModal__Content {
-  margin: 100px;
+  margin-top: 2%;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-bottom: 15%;
   padding: 0% !important;
-  background: #f5f9ff important;
 }
 
 .outline {

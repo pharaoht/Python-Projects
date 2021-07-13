@@ -12,24 +12,28 @@ class CustomUserCreate(APIView):
 
     def post(self, request):
         reg_serializer = UserSerializer(data=request.data)
+        print(request.data)
         if reg_serializer.is_valid():
             newuser = reg_serializer.save()
             if newuser:
                 return Response(status=status.HTTP_201_CREATED)
-        return Response(reg_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response(data=reg_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(['GET', ])
-def all_users(request):
-    try:
-        client_user = User.objects.all()
-    except User.DoesNotExist:
-        return Response(status=status.HTTP_404_NOT_FOUND)
-    serializer = UserSerializer(client_user, many=True)
-    return Response(serializer.data)
+class CreateProduct(APIView):
+    permission_classes = [AllowAny]
+
+    def post(self, request):
+        reg_serializer = ProductSerializer(data=request.data)
+        print(reg_serializer)
+        if reg_serializer.is_valid():
+            newproduct = reg_serializer.save()
+            if newproduct:
+                return Response(status=status.HTTP_201_CREATED)
+        return Response(data=reg_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(['POST', ])
+@ api_view(['POST', ])
 def create_new_user(request):
 
     if request.method == "POST":
@@ -40,7 +44,7 @@ def create_new_user(request):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(['POST', ])
+@ api_view(['POST', ])
 def add_new_product(request):
     print(request.data['category'])
     cate = Category.objects.get(id=request.data['category'])
@@ -53,7 +57,7 @@ def add_new_product(request):
     return Response(data=serializer2.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(['POST'])
+@ api_view(['POST'])
 def add_new_category(request):
     if request.method == "POST":
         serializer = CategorySerializer(data=request.data)
@@ -63,7 +67,7 @@ def add_new_category(request):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(['GET'])
+@ api_view(['GET'])
 def get_all_products(request):
     try:
         products = Product.objects.all()
@@ -76,7 +80,7 @@ def get_all_products(request):
 # going to make this route dynamic to find item based off what is click
 
 
-@api_view(['GET'])
+@ api_view(['GET'])
 def get_all_shirts(request):
     try:
         shirts = Product.objects.filter(category_id=2)
@@ -86,7 +90,7 @@ def get_all_shirts(request):
     return Response(serializer.data)
 
 
-@api_view(['GET'])
+@ api_view(['GET'])
 def get_all_categories(request):
     try:
         categories = Category.objects.all()
@@ -95,4 +99,4 @@ def get_all_categories(request):
     serializer = CategorySerializer(categories, many=True)
     return Response(serializer.data)
 
-#Response(data, status=None, template_name=None, headers=None, content_type=None)
+# Response(data, status=None, template_name=None, headers=None, content_type=None)
