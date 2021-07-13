@@ -4,8 +4,9 @@ from .models import NewUser, Category, Product, Gender
 from .serializers import UserSerializer, ProductSerializer, CategorySerializer, GenderSerializer
 from rest_framework.decorators import api_view
 from rest_framework.views import APIView
-from rest_framework.permissions import AllowAny
-from django.views.generic import ListView
+from rest_framework.permissions import AllowAny, IsAuthenticatedOrReadOnly
+from rest_framework import viewsets
+from django.shortcuts import get_object_or_404
 
 
 class CustomUserCreate(APIView):
@@ -34,12 +35,18 @@ class CreateProduct(APIView):
         return Response(data=reg_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class GetAllMaleProducts(ListView):
-    queryset = Gender.objects.filter(gender=1)
-    serializer_class = GenderSerializer
+class ProductList(viewsets.ViewSet):
+    permission_classes = [IsAuthenticatedOrReadOnly]
+    queryset = Product.objects.all()
 
-    def getdara(self):
-        return serializer_class
+    def list(self, request):
+        serializer_class = ProductSerializer(self.queryset, many=True)
+        return Response(serializer_class.data)
+
+    def retrieve(self, request, pk=None):
+        product = get_object_or_404(self.queryset, pk=pk)
+        serializer_class = ProductSerializer(product)
+        return Response(serializer_class.data)
 
 
 @ api_view(['POST', ])
