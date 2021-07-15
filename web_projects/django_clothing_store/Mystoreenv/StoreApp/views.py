@@ -37,7 +37,7 @@ class CreateProduct(APIView):
 
 class ProductList(viewsets.ViewSet):
     permission_classes = [IsAuthenticatedOrReadOnly]
-    queryset = Product.objects.all()
+    queryset = Product.objects.filter()
 
     def list(self, request):
         serializer_class = ProductSerializer(self.queryset, many=True)
