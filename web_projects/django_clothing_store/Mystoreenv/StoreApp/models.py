@@ -74,7 +74,7 @@ class Product(models.Model):
     photo2 = models.ImageField(upload_to='media/', blank=True)
     photo3 = models.ImageField(upload_to='media/', blank=True)
     description = models.TextField()
-    in_stock = models.BooleanField(default=True)
+    is_onSale = models.BooleanField(default=True)
     objects = models.Manager()
 
     def __str__(self):
