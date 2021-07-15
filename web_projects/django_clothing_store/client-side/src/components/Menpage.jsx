@@ -16,12 +16,17 @@ const Menpage = () =>{
             setAllCategories(res.data)  
         }).catch(err => console.log(err))
 
-        axios.get("http://localhost:8000/api/get-all-products/")
+        axios.get("http://localhost:8000/api/get-all-male-products/")
         .then(res =>{
             setAllProducts(res.data)
             console.log(res.data)
         }).catch(err => console.log(err))
     },[deleteState])
+
+    const shirtFilter = () =>{
+        
+        alert(e.target.name)
+    }
 
      return (
          <>
@@ -32,7 +37,7 @@ const Menpage = () =>{
                 <div className="sidebar">
                     <ul>
                     {allCategories.map((currentItem, idx) =>{
-                        return <li key={currentItem.id} className="cate-list">{currentItem.name}</li>
+                        return <li key={currentItem.id} className="cate-list"><a onClick={shirtFilter} href="#">{currentItem.name}</a></li>
                     })}
                     </ul>
                 </div>
@@ -45,7 +50,7 @@ const Menpage = () =>{
                                         <img src={'http://127.0.0.1:8000' + currentItem.photo1} alt="item" height="200" width="200" />
                                     </div>
                                     <div className="itemfooter">
-                                        <p>{currentItem.name} - {currentItem.price}</p>
+                                        <p>{currentItem.name} - ${currentItem.price}</p>
                                     </div>
                                 </div>
                             </li>

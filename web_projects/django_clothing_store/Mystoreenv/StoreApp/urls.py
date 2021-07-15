@@ -9,7 +9,7 @@ urlpatterns = [
     path('add-new-category/', views.add_new_category),
     path('get-all-male-products/', views.get_all_products_male),
     path('get-all-female-products/', views.get_all_products_female),
-    path('get-all-t-shirts/', views.get_all_shirts),
+    path('get-all-male-shirt/', views.get_all_shirts_male),
     path('get-all-categories/', views.get_all_categories),
     path('register/', views.CustomUserCreate.as_view(), name="create_user"),
 

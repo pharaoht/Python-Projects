@@ -5,6 +5,7 @@ import Modal from 'react-modal';
 import '../css/Header.css';
 import  axiosInstance  from '../axios';
 import {useHistory} from 'react-router-dom';
+import axios from 'axios';
 
 
 
@@ -26,6 +27,17 @@ export default function Header(){
       });
 
       const [formData, updatedFormData] = useState(initialFormData)
+
+      useEffect(()=>{
+                axios.get("http://localhost:8000/api/get-all-male-products/",{
+        },[])
+        .then(res=>{
+            console.log(res)
+        }).catch(err => {
+            setFormErrors(err.response)
+            
+        })
+      })
 
       const handleChange = (e) => {
         updatedFormData({

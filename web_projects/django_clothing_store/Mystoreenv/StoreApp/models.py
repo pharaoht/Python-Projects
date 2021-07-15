@@ -58,11 +58,6 @@ class Gender(models.Model):
 
 
 class Product(models.Model):
-
-    # class ProductObjects(models.Manager):
-    #     def get_queryset(self):
-    #         return super().get_queryset() .filter(gender='male')
-
     category = models.ForeignKey(
         Category, related_name='category', on_delete=models.PROTECT, null=True)
     gender = models.ForeignKey(
@@ -74,7 +69,7 @@ class Product(models.Model):
     photo2 = models.ImageField(upload_to='media/', blank=True)
     photo3 = models.ImageField(upload_to='media/', blank=True)
     description = models.TextField()
-    is_onSale = models.BooleanField(default=True)
+    is_onSale = models.BooleanField(default=False)
     objects = models.Manager()
 
     def __str__(self):

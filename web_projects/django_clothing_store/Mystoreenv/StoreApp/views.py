@@ -64,13 +64,13 @@ def get_all_products_female(request):
     serializer = ProductSerializer(products_female, many=True)
     return Response(serializer.data)
 
-# going to make this route dynamic to find item based off what is click
+# make this dynamic
 
 
 @ api_view(['GET'])
-def get_all_shirts(request):
+def get_all_shirts_male(request):
     try:
-        shirts = Product.objects.filter(category_id=2)
+        shirts = Product.objects.filter(category_id=1, gender=1)
     except shirts.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
     serializer = ProductSerializer(shirts, many=True)
