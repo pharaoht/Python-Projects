@@ -45,28 +45,15 @@ def add_new_category(request):
 
 @ api_view(['GET'])
 def get_all_products_male(request):
-
-    try:
-        products = Product.objects.filter(gender=1)
-        print(products)
-    except products.DoesNotExist:
-        return Response(status=status.HTTP_404_NOT_FOUND)
-    serializer = ProductSerializer(products, many=True)
-    return Response(serializer.data)
+    get_items(1)
 
 
 @api_view(['GET'])
 def get_all_products_female(request):
-    try:
-        products_female = Product.objects.filter(gender=2)
-    except products_female.DoesNotExist:
-        return Response(status=status.HTTP_404_NOT_FOUND)
-    serializer = ProductSerializer(products_female, many=True)
-    return Response(serializer.data)
+    get_items(2)
+
 
 # make this dynamic
-
-
 @api_view(['GET'])
 def filter_cate(request, catid, gendid):
     try:
@@ -125,3 +112,12 @@ class CustomUserCreate(APIView):
     #     product = get_object_or_404(self.queryset, pk=pk)
     #     serializer_class = ProductSerializer(product)
     #     return Response(serializer_class.data)
+
+
+def get_items(genid):
+    try:
+        products = Product.objects.filter(gender=genid)
+    except products.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    serializer = ProductSerializer(products, many=True)
+    return Response(serializer.data)
