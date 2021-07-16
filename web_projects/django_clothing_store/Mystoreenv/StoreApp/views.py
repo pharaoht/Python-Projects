@@ -45,12 +45,14 @@ def add_new_category(request):
 
 @ api_view(['GET'])
 def get_all_products_male(request):
-    get_items(1)
+    serial_data = get_items(1)
+    return Response(serial_data, status=status.HTTP_200_OK)
 
 
 @api_view(['GET'])
 def get_all_products_female(request):
-    get_items(2)
+    serial_data = get_items(2)
+    return Response(serial_data, status=status.HTTP_200_OK)
 
 
 # make this dynamic
@@ -72,6 +74,17 @@ def get_all_categories(request):
         return Response(status=status.HTTP_404_NOT_FOUND)
     serializer = CategorySerializer(categories, many=True)
     return Response(serializer.data)
+
+
+@api_view(['GET'])
+def get_one_item(request, prodid):
+    try:
+        product = Product.objects.get(id=prodid)
+    except product.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    serializer = ProductSerializer(product)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
 
 # Response(data, status=None, template_name=None, headers=None, content_type=None)
 
@@ -120,4 +133,4 @@ def get_items(genid):
     except products.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
     serializer = ProductSerializer(products, many=True)
-    return Response(serializer.data)
+    return serializer.data

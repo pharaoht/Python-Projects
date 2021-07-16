@@ -7,7 +7,7 @@ import AddProduct from './components/AddProduct';
 import SignUp from './components/Register';
 import Menpage from './components/Menpage';
 import HomePage from './components/HomePage';
-
+import ProductOverView from './components/DetailProduct';
 
 function App() {
 
@@ -20,6 +20,7 @@ function App() {
         <HomePage path='/'></HomePage>
         <Menpage path='/shop/men'></Menpage>
         <AddProduct path='/admin/add-product'></AddProduct>
+        <ProductOverView path='/item/:id'></ProductOverView>
         
       </Router>
      <br>

@@ -10,7 +10,8 @@ urlpatterns = [
     path('get-all-male-products/', views.get_all_products_male),
     path('get-all-female-products/', views.get_all_products_female),
     path('get-all-categories/', views.get_all_categories),
-    path('filter/<int:catid>/<int:gendid>', views.filter_cate),
+    path('filter/<int:catid>/<int:gendid>/', views.filter_cate),
+    path('get-product/<int:prodid>/', views.get_one_item),
     path('register/', views.CustomUserCreate.as_view(), name="create_user"),
 
 ]

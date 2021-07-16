@@ -27,7 +27,7 @@ const Menpage = () =>{
         const gender = 1
         const catIntId = parseInt(catid)
          
-        axios.get("http://localhost:8000/api/filter/" + catIntId + "/" + gender)
+        axios.get("http://localhost:8000/api/filter/" + catIntId + "/" + gender + "/")
         .then(res => {
             setAllProducts(res.data)
             console.log(res)
@@ -53,7 +53,7 @@ const Menpage = () =>{
                             return <li className="list-prod" id={currentItem.id}>
                                 
                                 <div className="item">
-                                    <Link to="/find">
+                                    <Link to={'/item/' + currentItem.id}>
                                     <div className="imageitem">
                                         <img src={'http://127.0.0.1:8000' + currentItem.photo1} alt="item" height="200" width="200" />
                                     </div>
