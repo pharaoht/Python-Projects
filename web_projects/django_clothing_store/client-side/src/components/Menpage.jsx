@@ -51,14 +51,18 @@ const Menpage = () =>{
                     <ul className="products"> 
                         {allProducts.map((currentItem) =>{
                             return <li className="list-prod" id={currentItem.id}>
+                                
                                 <div className="item">
+                                    <Link to="/find">
                                     <div className="imageitem">
                                         <img src={'http://127.0.0.1:8000' + currentItem.photo1} alt="item" height="200" width="200" />
                                     </div>
                                     <div className="itemfooter">
                                         <p>{currentItem.name} - ${currentItem.price}</p>
                                     </div>
+                                    </Link>
                                 </div>
+                                
                             </li>
                         })}
                     </ul>

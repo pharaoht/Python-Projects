@@ -61,6 +61,15 @@ const HomePage = () =>{
                     </div>
                 </div>
             </div>
+
+            <div>
+                <hr></hr>
+                <h1>See What is New</h1>
+                <hr></hr>
+                <div className="new-section">
+
+                </div>
+            </div>
       </>
 
      )
