@@ -77,6 +77,16 @@ def get_all_shirts_male(request):
     return Response(serializer.data)
 
 
+@api_view(['GET'])
+def filter_cate(request, catid, gendid):
+    try:
+        catefilt = Product.objects.filter(category=catid, gender=gendid)
+    except catefilt.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    serializer = ProductSerializer(catefilt, many=True)
+    return Response(serializer.data)
+
+
 @ api_view(['GET'])
 def get_all_categories(request):
     try:

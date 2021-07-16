@@ -23,9 +23,15 @@ const Menpage = () =>{
         }).catch(err => console.log(err))
     },[deleteState])
 
-    const shirtFilter = () =>{
-        
-        alert(e.target.name)
+    const filter = (e, catid) =>{
+        const gender = 1
+        const catIntId = parseInt(catid)
+         
+        axios.get("http://localhost:8000/api/filter/" + catIntId + "/" + gender)
+        .then(res => {
+            setAllProducts(res.data)
+            console.log(res)
+        }).catch(err => console.log(err))
     }
 
      return (
@@ -37,7 +43,7 @@ const Menpage = () =>{
                 <div className="sidebar">
                     <ul>
                     {allCategories.map((currentItem, idx) =>{
-                        return <li key={currentItem.id} className="cate-list"><a onClick={shirtFilter} href="#">{currentItem.name}</a></li>
+                        return <li key={currentItem.id} className="cate-list"><a onClick={(e) => filter(e, currentItem.id)} href="#">{currentItem.name}</a></li>
                     })}
                     </ul>
                 </div>
