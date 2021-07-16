@@ -9,6 +9,8 @@ const Menpage = () =>{
     const[allCategories, setAllCategories] = useState([])
     const[deleteState, setDeleteState] = useState(false)
     const[allProducts, setAllProducts] = useState([])
+    const[paginationNext, setPaginationNext] = useState([])
+    const[paginationPrev, setPaginationPrev] = useState([])
 
     useEffect(() =>{
         axios.get("http://localhost:8000/api/get-all-categories/")
@@ -18,19 +20,58 @@ const Menpage = () =>{
 
         axios.get("http://localhost:8000/api/get-all-male-products/")
         .then(res =>{
-            setAllProducts(res.data)
-            console.log(res.data)
+            console.log(res)
+            setAllProducts(res.data.results)
+            setPaginationNext(res.data.next)
+            setPaginationPrev(res.data.previous)
+            
         }).catch(err => console.log(err))
     },[deleteState])
 
     const filter = (e, catid) =>{
         const gender = 1
         const catIntId = parseInt(catid)
+
+        if(catIntId == -1){
+            axios.get("http://localhost:8000/api/get-all-male-products/")
+            .then(res =>{
+                setAllProducts(res.data.results)
+                
+            }).catch(err => console.log(err))
+        }else{
+            axios.get("http://localhost:8000/api/filter/" + catIntId + "/" + gender + "/")
+            .then(res => {
+                setAllProducts(res.data)
+
+                console.log(allProducts)
+            }).catch(err => console.log(err))
+
+        }
          
-        axios.get("http://localhost:8000/api/filter/" + catIntId + "/" + gender + "/")
-        .then(res => {
-            setAllProducts(res.data)
-            console.log(res)
+
+    }
+
+    const pagNext = (e, url) =>{
+        if(url == null || undefined){
+            return null
+        }
+        axios.get(url)
+        .then(res =>{
+            setAllProducts(res.data.results)
+            setPaginationNext(res.data.next)
+            setPaginationPrev(res.data.previous)
+        }).catch(err => console.log(err))
+    }
+
+    const pagPrev = (e, url) =>{
+        if(url == null || undefined){
+            return null
+        }
+        axios.get(url)
+        .then(res =>{
+            setAllProducts(res.data.results)
+            setPaginationNext(res.data.next)
+            setPaginationPrev(res.data.previous)
         }).catch(err => console.log(err))
     }
 
@@ -45,6 +86,7 @@ const Menpage = () =>{
                     {allCategories.map((currentItem, idx) =>{
                         return <li key={currentItem.id} className="cate-list"><a onClick={(e) => filter(e, currentItem.id)} href="#">{currentItem.name}</a></li>
                     })}
+                    <li key="a"className="cate-list"><a onClick={(e) => filter(e, -1)}  href="#">All</a></li>
                     </ul>
                 </div>
                 <div className="main-container">
@@ -65,7 +107,13 @@ const Menpage = () =>{
                                 
                             </li>
                         })}
+                        
                     </ul>
+                    <div className="product-footer">
+                        <div><a onClick={(e)=> pagPrev(e, paginationPrev)}href="#">Previous</a></div>
+                        
+                        <div><a onClick={(e)=> pagNext(e, paginationNext)}href="#">Next</a></div>
+                    </div>
                 </div>
             </div>
           

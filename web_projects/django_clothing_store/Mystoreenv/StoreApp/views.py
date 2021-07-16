@@ -7,6 +7,7 @@ from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny, IsAuthenticatedOrReadOnly
 from rest_framework import viewsets
 from django.shortcuts import get_object_or_404
+from rest_framework.pagination import PageNumberPagination
 
 
 @ api_view(['POST', ])
@@ -45,14 +46,22 @@ def add_new_category(request):
 
 @ api_view(['GET'])
 def get_all_products_male(request):
-    serial_data = get_items(1)
-    return Response(serial_data, status=status.HTTP_200_OK)
+    genid = 1
+
+    try:
+        products = Product.objects.filter(gender=genid)
+        paginator = PageNumberPagination()
+        paginator.page_size = 16
+    except products.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    result_page = paginator.paginate_queryset(products, request)
+    serializer = ProductSerializer(result_page, many=True)
+    return paginator.get_paginated_response(serializer.data)
 
 
 @api_view(['GET'])
 def get_all_products_female(request):
-    serial_data = get_items(2)
-    return Response(serial_data, status=status.HTTP_200_OK)
+    pass
 
 
 # make this dynamic
@@ -125,12 +134,3 @@ class CustomUserCreate(APIView):
     #     product = get_object_or_404(self.queryset, pk=pk)
     #     serializer_class = ProductSerializer(product)
     #     return Response(serializer_class.data)
-
-
-def get_items(genid):
-    try:
-        products = Product.objects.filter(gender=genid)
-    except products.DoesNotExist:
-        return Response(status=status.HTTP_404_NOT_FOUND)
-    serializer = ProductSerializer(products, many=True)
-    return serializer.data
