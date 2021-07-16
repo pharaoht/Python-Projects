@@ -67,16 +67,6 @@ def get_all_products_female(request):
 # make this dynamic
 
 
-@ api_view(['GET'])
-def get_all_shirts_male(request):
-    try:
-        shirts = Product.objects.filter(category_id=1, gender=1)
-    except shirts.DoesNotExist:
-        return Response(status=status.HTTP_404_NOT_FOUND)
-    serializer = ProductSerializer(shirts, many=True)
-    return Response(serializer.data)
-
-
 @api_view(['GET'])
 def filter_cate(request, catid, gendid):
     try:

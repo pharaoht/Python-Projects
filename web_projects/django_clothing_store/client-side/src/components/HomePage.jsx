@@ -45,10 +45,12 @@ const HomePage = () =>{
                 <h1>Revolutionize Your Look</h1>
                 <hr></hr>
                 <div className="selection">
+                    <Link to="/shop/men">
                     <div className="box" id="men-photo">
                         <i>Men</i>
                         <img src={photo4}height="350" width="350"/>
                     </div>
+                    </Link>
                     <div className="iwomen">
                         <i>Women</i>
                         <img src={photo5} height="350" width="350" />
