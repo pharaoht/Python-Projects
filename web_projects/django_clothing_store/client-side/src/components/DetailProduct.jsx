@@ -70,7 +70,7 @@ const ProductOverView = (props) => {
                         <button className="btn-primary">Add to Cart</button>
                         </form> 
                         <hr></hr>
-                        <h4>Similar Items</h4>
+                        <h4>Similar Items:</h4>
                         <div className="similar-items">
                         
                             {allProducts.map((currentItem, idx) =>{
