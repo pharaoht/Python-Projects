@@ -20,7 +20,7 @@ function App() {
         <HomePage path='/'></HomePage>
         <Menpage path='/shop/men'></Menpage>
         <AddProduct path='/admin/add-product'></AddProduct>
-        <ProductOverView path='/item/:id'></ProductOverView>
+        <ProductOverView path='/item/:id/:catid'></ProductOverView>
         
       </Router>
      <br>
