@@ -67,7 +67,7 @@ const ProductOverView = (props) => {
                         <option>5</option>
                         </select></h4>
                         <h4>Size:</h4>
-                        <button className="btn-primary">Add to Cart</button>
+                        <button className="btn-primary">Add to Cart!</button>
                         </form> 
                         <hr></hr>
                         <h4>Similar Items:</h4>
