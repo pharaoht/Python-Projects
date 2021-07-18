@@ -51,10 +51,12 @@ const HomePage = () =>{
                         <img src={photo4}height="350" width="350"/>
                     </div>
                     </Link>
+                    <Link to='/shop/women'>
                     <div className="iwomen">
                         <i>Women</i>
                         <img src={photo5} height="350" width="350" />
                     </div>
+                    </Link>
                     <div className="box">
                         <i>Sale</i>
                         <img src={photo6} height="350" width="350" />

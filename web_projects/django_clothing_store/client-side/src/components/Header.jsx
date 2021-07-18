@@ -92,7 +92,7 @@ export default function Header(){
                   <a href="/shop/men" className="nav-link">Men</a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="#">Women</a>
+                  <a className="nav-link" href="/shop/women">Women</a>
                 </li>
                 <li className="nav-item">
                   <a className="nav-link" href="#">New Arrivals</a>

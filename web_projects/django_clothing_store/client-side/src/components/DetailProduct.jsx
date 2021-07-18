@@ -74,7 +74,20 @@ const ProductOverView = (props) => {
                         <div className="similar-items">
                         
                             {allProducts.map((currentItem, idx) =>{
-                                return <img src={'http://127.0.0.1:8000' + currentItem.photo1} alt="item"/>
+                                const url = '/item/' + currentItem.id + '/' + currentItem.category.id + '/'
+                                if (currentItem.id != product.id){
+                                    return <>
+                                        <a href={url}>
+                                        <img src={'http://127.0.0.1:8000' + currentItem.photo1} alt="item"/>
+                                        </a>
+                                    </>
+                                }else if (allProducts.length == 1){
+                                    return <>
+                                        <div>No items available</div>
+                                    </>
+                                }
+
+                                
                             })}
                         </div>
                     </div>
@@ -85,9 +98,3 @@ const ProductOverView = (props) => {
 }
 
 export default ProductOverView;
-
-                {/* <p>{product.name}</p>
-                <p>{product.description}</p>
-                <p><img src={'http://127.0.0.1:8000' + product.photo1} alt="item" height="200" width="200" /></p>
-                {product.photo2 ? <p><img src={'http://127.0.0.1:8000' + product.photo2} alt="item" height="200" width="200" /></p>: null}
-                {product.photo3 ? <p><img src={'http://127.0.0.1:8000' + product.photo3} alt="item" height="200" width="200" /></p> : null} */}

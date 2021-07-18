@@ -8,6 +8,7 @@ import SignUp from './components/Register';
 import Menpage from './components/Menpage';
 import HomePage from './components/HomePage';
 import ProductOverView from './components/DetailProduct';
+import WomensPage from './components/WomensPage';
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
       <Router>
         <HomePage path='/'></HomePage>
         <Menpage path='/shop/men'></Menpage>
+        <WomensPage path='/shop/women'></WomensPage>
         <AddProduct path='/admin/add-product'></AddProduct>
         <ProductOverView path='/item/:id/:catid'></ProductOverView>
         

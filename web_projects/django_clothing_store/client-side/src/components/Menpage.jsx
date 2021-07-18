@@ -42,8 +42,7 @@ const Menpage = () =>{
             axios.get("http://localhost:8000/api/filter/" + catIntId + "/" + gender + "/")
             .then(res => {
                 setAllProducts(res.data)
-
-                console.log(allProducts)
+                
             }).catch(err => console.log(err))
 
         }
@@ -92,6 +91,7 @@ const Menpage = () =>{
                 <div className="main-container">
                     <ul className="products"> 
                         {allProducts.map((currentItem) =>{
+
                             return <li className="list-prod" id={currentItem.id}>
                                 
                                 <div className="item">
