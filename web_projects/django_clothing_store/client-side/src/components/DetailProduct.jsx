@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import { Link, navigate } from '@reach/router'
 import '../css/Detailpage.css';
+
 const ProductOverView = (props) => {
     const [product, setProduct] = useState([])
     const[deleteState, setDeleteState] = useState(false)
