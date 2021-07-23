@@ -54,3 +54,13 @@ p.copyright {
 .submit-btn {
   margin-top: 20px;
 }
+
+.shopping {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+#shop {
+  font-size: 30px;
+}

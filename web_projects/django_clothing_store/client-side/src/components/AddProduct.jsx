@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import { Link, navigate } from '@reach/router'
+import {addItem} from './Cart';
 
 const AddProduct = () =>{
     const[allCategories, setAllCategories] = useState([])
@@ -64,11 +65,12 @@ const AddProduct = () =>{
         })
     }
 
+        
 
     return (
         <div className="container">
             <h1>What Product do you want to add?</h1>
-            <form onSubmit={submitHandler} enctype='multipart/form-data' >
+
             <span>Name of item</span>
             <p className="text-danger" role="alert">{formErrors ? formErrors.name : "" }</p>
             <p><input type="text" name="name" onChange={changeHandler}/></p>
@@ -93,8 +95,8 @@ const AddProduct = () =>{
                 })}
                </select>
             </p>
-            <button type="submit">Add</button>
-            </form>
+            <button type="button" onClick={addItem()}>Add</button>
+           
         </div>
     )
 }

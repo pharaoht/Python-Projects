@@ -36,13 +36,13 @@ const Menpage = () =>{
             axios.get("http://localhost:8000/api/get-all-male-products/")
             .then(res =>{
                 setAllProducts(res.data.results)
-                
+                 console.log(allProducts.length)
             }).catch(err => console.log(err))
         }else{
             axios.get("http://localhost:8000/api/filter/" + catIntId + "/" + gender + "/")
             .then(res => {
                 setAllProducts(res.data)
-                
+                 console.log(allProducts.length)
             }).catch(err => console.log(err))
 
         }
@@ -74,6 +74,7 @@ const Menpage = () =>{
         }).catch(err => console.log(err))
     }
 
+
      return (
          <>
             <div>
@@ -90,6 +91,7 @@ const Menpage = () =>{
                 </div>
                 <div className="main-container">
                     <ul className="products"> 
+                        
                         {allProducts.map((currentItem) =>{
 
                             return <li className="list-prod" id={currentItem.id}>

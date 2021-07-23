@@ -61,7 +61,16 @@ def get_all_products_male(request):
 
 @api_view(['GET'])
 def get_all_products_female(request):
-    pass
+    genid = 2
+    try:
+        products = Product.objects.filter(gender=genid)
+        paginator = PageNumberPagination()
+        paginator.page_size = 16
+    except products.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    result_page = paginator.paginate_queryset(products, request)
+    serializer = ProductSerializer(result_page, many=True)
+    return paginator.get_paginated_response(serializer.data)
 
 
 # make this dynamic

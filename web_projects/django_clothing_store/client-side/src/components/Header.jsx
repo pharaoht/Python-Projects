@@ -69,6 +69,7 @@ export default function Header(){
         } )}
   return (
     <>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link>
     
            {/* add logic to show if user is logged in*/}
       <div className="user-login">
@@ -107,6 +108,11 @@ export default function Header(){
                   <a className="nav-link" href="#">About Us</a>
                 </li>
               </ul>
+              <div className="shopping">
+                <span id="shop" class="material-icons md-48">shopping_cart</span>
+              </div>
+                  
+               
             </div>
         </nav>
       </div>
