@@ -3,7 +3,7 @@
 from rest_framework.serializers import ModelSerializer
 from rest_framework import serializers
 # from .models import User
-from .models import Product, Category, NewUser, Gender, Size
+from .models import Product, Category, NewUser, Gender, Size, Quantity
 from django.contrib.auth.hashers import make_password
 from django.db import models
 from rest_framework.validators import UniqueValidator
@@ -59,6 +59,14 @@ class ProductSerializer(ModelSerializer):
 class SizeSerializer(ModelSerializer):
     class Meta:
         model = Size
+        fields = [
+            'id', 'name'
+        ]
+
+
+class QuantitySerializer(ModelSerializer):
+    class Meta:
+        model = Quantity
         fields = [
             'id', 'name'
         ]

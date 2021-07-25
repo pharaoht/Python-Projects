@@ -5,13 +5,22 @@ import '../css/Detailpage.css';
 import {CartContext} from '../components/CartContext'
 
 const ProductOverView = (props) => {
-    const [product, setProduct] = useState([])
+    const[product, setProduct] = useState([])
     const[deleteState, setDeleteState] = useState(false)
     const[allProducts, setAllProducts] = useState([])
     const[sizes, setSizes] = useState([])
+    const[quanities, setQuantities] = useState([])
     const [cart, setCart] = useContext(CartContext)
+    const [formInfo, setFormInfo] = useState({
+        product_name: "",
+        product_price: "",
+        product_total_price:"",
+        product_img: "",
+        product_qty:"",
+        product_size:"",
+    })
+    //make gender id dynamic
     const gen = 1
-    const totalPrice = cart.reduce((acc, curr)=> acc + curr.price, 0)
 
     useEffect(()=>{
 
@@ -33,9 +42,36 @@ const ProductOverView = (props) => {
                 console.log("*****")
                 console.log(res.data)
             }).catch(err => console.log(err))
-        
 
+        axios.get("http://localhost:8000/api/get-quantities/")
+            .then(res => {
+                setQuantities(res.data)
+                console.log("*****")
+                console.log(res.data)
+            }).catch(err => console.log(err))
     },[deleteState])
+
+    const changeHandler = (e) => {
+        var floatPrice = parseFloat(product.price)
+        if(e.target.name === "product_qty"){
+            var intQty = parseInt(e.target.value)
+            console.log(floatPrice * intQty)
+            setFormInfo({
+                ...formInfo,
+                [e.target.name]: intQty,
+                product_name:product.name,
+                product_price: floatPrice, 
+                product_total_price: floatPrice * intQty,
+                product_img: product.photo1,
+            })
+        }else{
+            setFormInfo({
+                ...formInfo,
+                [e.target.name]: e.target.value,
+        })
+        }
+
+    }
 
     const imgChanger = (num) =>{
         console.log(product.category.id, product.gender.id )
@@ -49,19 +85,11 @@ const ProductOverView = (props) => {
         
     }
 
-    const addToCart = () =>{
-        var intPrice = parseFloat(product.price)
-        var rnd = Math.round(intPrice * 100) / 100
-        const item = {name: product.name, price: rnd, photo: product.photo1, desc: product.description, id: product.id}
-        setCart(curr => [...curr, {...item}])
-        setTimeout(console.log(totalPrice), 2000)
-        
+    const addToCart = (e) =>{
+        e.preventDefault()
+        console.log(formInfo)
+        setCart(curr => [...curr, {...formInfo}])
     }
-
-    const windowChange = () =>{
-
-    }
-
 
     return (
         <>
@@ -83,29 +111,38 @@ const ProductOverView = (props) => {
                         <hr></hr>
                         <h4>{product.name}</h4>
                         <h4>Price: ${product.price}</h4>
-                        <h4>Quantity:
-                        <select> 
-                        <option>1</option>
-                        <option>2</option> 
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                        </select></h4>
+                        <form onSubmit={addToCart}>
+                        <div className="size-holder">
+                            <h4>Quantity:</h4>
+                            <div className="boxed">
+                            {quanities.map((currentItem, idx)=>{
+                                return <>
+                                <div className="sizes">
+                                <input type="radio" id={currentItem.name} name="product_qty" value={currentItem.id} key={currentItem.id} onChange={changeHandler}/>
+                                <label for={currentItem.id}>{currentItem.id}</label>
+                                </div>
+                                </>
+                            })}
+                            </div>
+                        </div>
+
+
                         <div className="size-holder">
                             <h4>Size:</h4>
                             <div className="boxed">
                             {sizes.map((currentItem, idx)=>{
                                 return <>
                                 <div className="sizes">
-                                <input type="radio" id={currentItem.id} name="size" value={currentItem.name} key={currentItem.id}/>
-                                <label for={currentItem.id}>{currentItem.name}</label>
+                                <input type="radio" id={currentItem.name} name="product_size" value={currentItem.name} key={currentItem.name} onChange={changeHandler}/>
+                                <label for={currentItem.name}>{currentItem.name}</label>
                                 </div>
                                 </>
                             })}
                             </div>
                         </div>
                         
-                        <button className="btn-primary btn" onClick={() => addToCart(product.id)}>Add to Cart!</button>
+                        <button className="btn-primary btn" type="submit">Add to Cart!</button>
+                        </form>
                         <hr></hr>
                         <h4>Similar Items:</h4>
                         <div className="similar-items">
@@ -114,7 +151,7 @@ const ProductOverView = (props) => {
                                 const url = '/item/' + currentItem.id + '/' + currentItem.category.id + '/'
                                 if (currentItem.id != product.id){
                                     return <>
-                                        <Link to={url}><img onClick={windowChange} src={'http://127.0.0.1:8000' + currentItem.photo1} alt="item"/></Link>
+                                        <Link to={url}><img src={'http://127.0.0.1:8000' + currentItem.photo1} alt="item"/></Link>
                                     </>
                                 }else if (allProducts.length == 1){
                                     return <>
