@@ -2,6 +2,8 @@ import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import { Link, navigate } from '@reach/router'
 import '../css/Menspage.css';
+import {connect} from 'react-redux'
+
 
 
 const Menpage = () =>{
@@ -36,18 +38,17 @@ const Menpage = () =>{
             axios.get("http://localhost:8000/api/get-all-male-products/")
             .then(res =>{
                 setAllProducts(res.data.results)
-                 console.log(allProducts.length)
+                setPaginationNext(res.data.next)
+                setPaginationPrev(res.data.previous)
             }).catch(err => console.log(err))
         }else{
             axios.get("http://localhost:8000/api/filter/" + catIntId + "/" + gender + "/")
             .then(res => {
                 setAllProducts(res.data)
-                 console.log(allProducts.length)
+                setPaginationNext(res.data.next)
+                setPaginationPrev(res.data.previous)
             }).catch(err => console.log(err))
-
         }
-         
-
     }
 
     const pagNext = (e, url) =>{
@@ -73,6 +74,7 @@ const Menpage = () =>{
             setPaginationPrev(res.data.previous)
         }).catch(err => console.log(err))
     }
+
 
 
      return (
@@ -112,15 +114,22 @@ const Menpage = () =>{
                         
                     </ul>
                     <div className="product-footer">
-                        <div><a onClick={(e)=> pagPrev(e, paginationPrev)}href="#">Previous</a></div>
+                        <div><Link onClick={(e)=> pagPrev(e, paginationPrev)} to="#">Previous</Link></div>
                         
-                        <div><a onClick={(e)=> pagNext(e, paginationNext)}href="#">Next</a></div>
+                        <div><Link onClick={(e)=> pagNext(e, paginationNext)} to="#">Next</Link></div>
                     </div>
                 </div>
             </div>
           
         </>
      )
+     
+}
+const mapStateToProps = state =>{
+    
+    return {
+        products: state.shop.products
+    }
 }
 
-export default Menpage;
+export default connect(mapStateToProps)(Menpage);

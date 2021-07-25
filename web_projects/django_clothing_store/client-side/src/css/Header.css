@@ -64,3 +64,7 @@ p.copyright {
 #shop {
   font-size: 30px;
 }
+
+.cart-count {
+  font-size: large;
+}

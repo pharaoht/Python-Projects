@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import { Link, navigate } from '@reach/router'
 import logo from './logo.PNG';
 import Modal from 'react-modal';
@@ -6,13 +6,13 @@ import '../css/Header.css';
 import  axiosInstance  from '../axios';
 import {useHistory} from 'react-router-dom';
 import axios from 'axios';
-
+import {CartContext} from '../components/CartContext'
 
 
 Modal.setAppElement('#root')
-export default function Header(){
-      const [modalIsOpen, setmodalIsOpen] = useState(false)
-
+const Header =() =>{
+    const [cart, setCart] = useContext(CartContext)
+      const [modalIsOpen, setmodalIsOpen] = useState(false) 
       const[formErrors, setFormErrors] = useState({
        email: "",
     })
@@ -29,15 +29,15 @@ export default function Header(){
       const [formData, updatedFormData] = useState(initialFormData)
 
       useEffect(()=>{
-                axios.get("http://localhost:8000/api/get-all-male-products/",{
-        },[])
+        axios.get("http://localhost:8000/api/get-all-male-products/",{
+        })
         .then(res=>{
             console.log(res)
         }).catch(err => {
             setFormErrors(err.response)
             
         })
-      })
+      },[])
 
       const handleChange = (e) => {
         updatedFormData({
@@ -81,38 +81,38 @@ export default function Header(){
 
       <div>
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
-          <a className="logo" href="/">
+          <Link className="logo" to="/">
              <img src={logo} width="165" height="50" class="d-inline-block " alt="logo"></img>
-          </a>
+          </Link>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
             </button>
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
               <ul className="navbar-nav mr-auto">
                 <li className="nav-item active">
-                  <a href="/shop/men" className="nav-link">Men</a>
+                  <Link to="/shop/men" className="nav-link">Men</Link>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="/shop/women">Women</a>
+                  <Link className="nav-link" to="/shop/women">Women</Link>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="#">New Arrivals</a>
+                  <Link className="nav-link" to="#">New Arrivals</Link>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="#">Full Suits</a>
+                  <Link className="nav-link" to="#">Full Suits</Link>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="#">On Sale</a>
+                  <Link className="nav-link" to="#">On Sale</Link>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="#">About Us</a>
+                  <Link className="nav-link" to="#">About Us</Link>
                 </li>
               </ul>
               <div className="shopping">
                 <span id="shop" class="material-icons md-48">shopping_cart</span>
+                <span className="cart-count">{cart.length}</span>
               </div>
-                  
-               
+
             </div>
         </nav>
       </div>
@@ -168,3 +168,5 @@ export default function Header(){
 }
 
 
+
+export default Header;

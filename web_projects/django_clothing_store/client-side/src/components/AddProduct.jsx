@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import { Link, navigate } from '@reach/router'
-import {addItem} from './Cart';
 
 const AddProduct = () =>{
     const[allCategories, setAllCategories] = useState([])
@@ -95,7 +94,7 @@ const AddProduct = () =>{
                 })}
                </select>
             </p>
-            <button type="button" onClick={addItem()}>Add</button>
+            <button type="button" >Add</button>
            
         </div>
     )

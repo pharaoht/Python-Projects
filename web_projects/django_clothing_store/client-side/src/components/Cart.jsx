@@ -1,16 +1,17 @@
 import React, {useState, useEffect} from 'react'
 
 const Cart = () =>{
-    const [cart,setCart] = useState([])
+    return (
+        <>
+        
+        
+        </>
+    )
 
 
 
 
 
-}
-
-export function addItem(){
-    alert("hii")
 }
 
 export default Cart;

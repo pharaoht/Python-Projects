@@ -1,13 +1,17 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import axios from 'axios'
 import { Link, navigate } from '@reach/router'
 import '../css/Detailpage.css';
+import {CartContext} from '../components/CartContext'
 
 const ProductOverView = (props) => {
     const [product, setProduct] = useState([])
     const[deleteState, setDeleteState] = useState(false)
     const[allProducts, setAllProducts] = useState([])
+    const [cart, setCart] = useContext(CartContext)
     const gen = 1
+    const totalPrice = cart.reduce((acc, curr)=> acc + curr.price, 0)
+
     useEffect(()=>{
 
         axios.get("http://localhost:8000/api/get-product/" + props.id + "/",)
@@ -25,7 +29,6 @@ const ProductOverView = (props) => {
 
     },[deleteState])
 
-
     const imgChanger = (num) =>{
         console.log(product.category.id, product.gender.id )
         if(num ==3){
@@ -35,6 +38,15 @@ const ProductOverView = (props) => {
         }else if(num == 1){
             document.getElementById('mainImg').src = `http://127.0.0.1:8000${product.photo1}`
         }
+        
+    }
+
+    const addToCart = () =>{
+        var intPrice = parseFloat(product.price)
+        var rnd = Math.round(intPrice * 100) / 100
+        const item = {name: product.name, price: rnd, photo: product.photo1, desc: product.description, id: product.id}
+        setCart(curr => [...curr, {...item}])
+        setTimeout(console.log(totalPrice), 2000)
         
     }
 
@@ -55,7 +67,6 @@ const ProductOverView = (props) => {
                 <div className="text-desc">
                     <p>{product.description}</p>
                     <div>
-                        <form>
                         <hr></hr>
                         <h4>{product.name}</h4>
                         <h4>Price: ${product.price}</h4>
@@ -68,8 +79,7 @@ const ProductOverView = (props) => {
                         <option>5</option>
                         </select></h4>
                         <h4>Size:</h4>
-                        <button className="btn-primary">Add to Cart!</button>
-                        </form> 
+                        <button className="btn-primary" onClick={() => addToCart(product.id)}>Add to Cart!</button>
                         <hr></hr>
                         <h4>Similar Items:</h4>
                         <div className="similar-items">
@@ -78,17 +88,13 @@ const ProductOverView = (props) => {
                                 const url = '/item/' + currentItem.id + '/' + currentItem.category.id + '/'
                                 if (currentItem.id != product.id){
                                     return <>
-                                        <a href={url}>
-                                        <img src={'http://127.0.0.1:8000' + currentItem.photo1} alt="item"/>
-                                        </a>
+                                        <a href={url}><img src={'http://127.0.0.1:8000' + currentItem.photo1} alt="item"/></a> 
                                     </>
                                 }else if (allProducts.length == 1){
                                     return <>
                                         <div>No items available</div>
                                     </>
                                 }
-
-                                
                             })}
                         </div>
                     </div>
@@ -97,5 +103,6 @@ const ProductOverView = (props) => {
         </>
     )
 }
+
 
 export default ProductOverView;
