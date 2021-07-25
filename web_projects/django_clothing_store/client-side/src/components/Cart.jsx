@@ -26,7 +26,7 @@ const Cart = () =>{
                           </div>
                           <h4>{currItem.product_name}</h4> 
                           <h4>${currItem.product_price} <span className="per-text">Per Unit</span></h4>
-                          <h5>Total: ${currItem.product_total_price}</h5>
+                          <h5>Total: ${currItem.product_total_price.toFixed(2)}</h5>
                           <hr></hr>
                           <p className="product-info">
                               <div className="item-cart">Size: <b>{currItem.product_size}</b></div>

@@ -112,7 +112,6 @@ const Header =() =>{
                 <Link to="/cart"><span id="shop" class="material-icons md-48">shopping_cart</span></Link>
                 <span className="cart-count">{cart.length}</span>
               </div>
-
             </div>
         </nav>
       </div>

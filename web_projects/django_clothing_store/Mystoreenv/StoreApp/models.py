@@ -88,3 +88,13 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class WishList(models.Model):
+    user = models.ForeignKey(
+        NewUser, related_name="user", on_delete=models.PROTECT)
+    product = models.ForeignKey(
+        Product, related_name="productWish", on_delete=models.PROTECT)
+
+    def __str__(self):
+        return self.user + self.product
