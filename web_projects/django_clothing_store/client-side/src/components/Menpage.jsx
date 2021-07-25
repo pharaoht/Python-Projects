@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
-import { Link, navigate } from '@reach/router'
+import { Link} from '@reach/router'
 import '../css/Menspage.css';
 import {connect} from 'react-redux'
 
@@ -96,7 +96,7 @@ const Menpage = () =>{
                         
                         {allProducts.map((currentItem) =>{
 
-                            return <li className="list-prod" id={currentItem.id}>
+                            return <li className="list-prod" key={currentItem.id}>
                                 
                                 <div className="item">
                                     <Link to={'/item/' + currentItem.id + '/' + currentItem.category.id + '/'}>

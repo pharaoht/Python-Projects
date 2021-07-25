@@ -1,7 +1,7 @@
 from rest_framework import status, generics
 from rest_framework.response import Response
-from .models import NewUser, Category, Product, Gender
-from .serializers import UserSerializer, ProductSerializer, CategorySerializer, GenderSerializer
+from .models import NewUser, Category, Product, Gender, Size
+from .serializers import UserSerializer, ProductSerializer, CategorySerializer, GenderSerializer, SizeSerializer
 from rest_framework.decorators import api_view
 from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny, IsAuthenticatedOrReadOnly
@@ -102,6 +102,16 @@ def get_one_item(request, prodid):
         return Response(status=status.HTTP_404_NOT_FOUND)
     serializer = ProductSerializer(product)
     return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@api_view(['GET'])
+def get_sizes(reqest):
+    try:
+        sizes = Size.objects.all()
+    except sizes.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    serializer = SizeSerializer(sizes, many=True)
+    return Response(serializer.data)
 
 
 # Response(data, status=None, template_name=None, headers=None, content_type=None)

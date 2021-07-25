@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
-import { Link, navigate } from '@reach/router'
+import { Link} from '@reach/router'
 import '../css/Womenspage.css';
 
 
@@ -31,7 +31,7 @@ const WomensPage = () =>{
         const gender = 2
         const catIntId = parseInt(catid)
 
-        if(catIntId == -1){
+        if(catIntId === -1){
                 axios.get("http://localhost:8000/api/get-all-female-products/")
                 .then(res =>{
                 setAllProducts(res.data.results)
@@ -81,9 +81,9 @@ const WomensPage = () =>{
                 <div className="sidebar">
                     <ul>
                     {allCategories.map((currentItem, idx) =>{
-                        return <li key={currentItem.id} className="cate-list"><a onClick={(e) => filter(e, currentItem.id)} href="#">{currentItem.name}</a></li>
+                        return <li key={currentItem.id} className="cate-list"><Link onClick={(e) => filter(e, currentItem.id)} to="#">{currentItem.name}</Link></li>
                     })}
-                    <li key="a"className="cate-list"><a onClick={(e) => filter(e, -1)}  href="#">All</a></li>
+                    <li key="a"className="cate-list"><Link onClick={(e) => filter(e, -1)}  to="#">All</Link></li>
                     </ul>
                 </div>
                 <div className="main-container">
@@ -108,9 +108,9 @@ const WomensPage = () =>{
                         
                     </ul>
                     <div className="product-footer">
-                        <div><a onClick={(e)=> pagPrev(e, paginationPrev)}href="#">Previous</a></div>
+                        <div><Link onClick={(e)=> pagPrev(e, paginationPrev)}to="#">Previous</Link></div>
                         
-                        <div><a onClick={(e)=> pagNext(e, paginationNext)}href="#">Next</a></div>
+                        <div><Link onClick={(e)=> pagNext(e, paginationNext)}to="#">Next</Link></div>
                     </div>
                 </div>
             </div>

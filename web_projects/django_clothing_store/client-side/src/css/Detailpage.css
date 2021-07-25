@@ -48,3 +48,30 @@
   display: inline-block;
   zoom: 1;
 }
+
+.boxed label {
+  display: inline-block;
+  width: 80px;
+  padding: 10px;
+  border: solid 2px #ccc;
+  transition: all 0.3s;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.boxed input[type="radio"] {
+  display: none;
+}
+
+.boxed input[type="radio"]:checked + label {
+  border: solid 2px dodgerblue;
+}
+
+.boxed {
+  display: flex;
+  justify-content: space-between;
+}
+
+.size-holder {
+  margin-bottom: 10px;
+}

@@ -57,6 +57,13 @@ class Gender(models.Model):
         return self.name
 
 
+class Size(models.Model):
+    name = models.CharField(max_length=50, db_index=True, unique=True)
+
+    def __str__(self):
+        return self.name
+
+
 class Product(models.Model):
     category = models.ForeignKey(
         Category, related_name='category', on_delete=models.PROTECT, null=True)

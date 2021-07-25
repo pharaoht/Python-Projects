@@ -9,6 +9,7 @@ import ProductOverView from './components/DetailProduct';
 import WomensPage from './components/WomensPage';
 import Footer from './components/Footer';
 import {CartProvider } from './components/CartContext'
+import Cart from './components/Cart';
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
       <Router>
         
         <HomePage path='/'></HomePage>
+        <Cart path='/cart'></Cart>
         <Menpage path='/shop/men'></Menpage>
         <WomensPage path='/shop/women'></WomensPage>
         <AddProduct path='/admin/add-product'></AddProduct>

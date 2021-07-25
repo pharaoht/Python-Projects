@@ -1,4 +1,5 @@
-import React, {useState, useEffect} from 'react'
+import React from 'react'
+import { Link} from '@reach/router'
 import '../css/Footer.css'
 
 export default function Footer(){
@@ -14,29 +15,29 @@ export default function Footer(){
                             <img src="img/logo.png" alt="" width="180" class="mb-3"></img>
                              <p class="font-italic text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
                             <ul class="list-inline mt-4">
-                                <li class="list-inline-item"><a href="#" target="_blank" title="twitter"><i class="fa fa-twitter"></i></a></li>
-                                <li class="list-inline-item"><a href="#" target="_blank" title="facebook"><i class="fa fa-facebook"></i></a></li>
-                                <li class="list-inline-item"><a href="#" target="_blank" title="instagram"><i class="fa fa-instagram"></i></a></li>
-                                <li class="list-inline-item"><a href="#" target="_blank" title="pinterest"><i class="fa fa-pinterest"></i></a></li>
-                                <li class="list-inline-item"><a href="#" target="_blank" title="vimeo"><i class="fa fa-vimeo"></i></a></li>
+                                <li class="list-inline-item"><Link to="#" target="_blank" title="twitter"><i class="fa fa-twitter"></i></Link></li>
+                                <li class="list-inline-item"><Link to="#" target="_blank" title="facebook"><i class="fa fa-facebook"></i></Link></li>
+                                <li class="list-inline-item"><Link to="#" target="_blank" title="instagram"><i class="fa fa-instagram"></i></Link></li>
+                                <li class="list-inline-item"><Link to="#" target="_blank" title="pinterest"><i class="fa fa-pinterest"></i></Link></li>
+                                <li class="list-inline-item"><Link to="#" target="_blank" title="vimeo"><i class="fa fa-vimeo"></i></Link></li>
                             </ul>
                         </div>
                         <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
                             <h6 class="text-uppercase font-weight-bold mb-4">Shop</h6>
                             <ul class="list-unstyled mb-0">
-                                <li class="mb-2"><a href="#" class="text-muted">For Women</a></li>
-                                <li class="mb-2"><a href="#" class="text-muted">For Men</a></li>
-                                <li class="mb-2"><a href="#" class="text-muted">Stores</a></li>
-                                <li class="mb-2"><a href="#" class="text-muted">Our Blog</a></li>
+                                <li class="mb-2"><Link to="#" class="text-muted">For Women</Link></li>
+                                <li class="mb-2"><Link to="#" class="text-muted">For Men</Link></li>
+                                <li class="mb-2"><Link to="#" class="text-muted">Stores</Link></li>
+                                <li class="mb-2"><Link to="#" class="text-muted">Our Blog</Link></li>
                             </ul>
                         </div>
                         <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
                             <h6 class="text-uppercase font-weight-bold mb-4">Company</h6>
                             <ul class="list-unstyled mb-0">
-                                <li class="mb-2"><a href="#" class="text-muted">Login</a></li>
-                                <li class="mb-2"><a href="#" class="text-muted">Register</a></li>
-                                <li class="mb-2"><a href="#" class="text-muted">Wishlist</a></li>
-                                <li class="mb-2"><a href="#" class="text-muted">Our Products</a></li>
+                                <li class="mb-2"><Link to="#" class="text-muted">Login</Link></li>
+                                <li class="mb-2"><Link to="#" class="text-muted">Register</Link></li>
+                                <li class="mb-2"><Link to="#" class="text-muted">Wishlist</Link></li>
+                                <li class="mb-2"><Link to="#" class="text-muted">Our Products</Link></li>
                             </ul>
                         </div>
                         <div class="col-lg-4 col-md-6 mb-lg-0">
@@ -58,7 +59,7 @@ export default function Footer(){
         <p class="text-muted mb-0 py-2">© {date} Data North All rights reserved.</p>
       </div>
     </div>
-            </footer>
+    </footer>
         </>
     )
 

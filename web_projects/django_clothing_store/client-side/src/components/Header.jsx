@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useContext} from 'react'
-import { Link, navigate } from '@reach/router'
+import { Link} from '@reach/router'
 import logo from './logo.PNG';
 import Modal from 'react-modal';
 import '../css/Header.css';
@@ -109,7 +109,7 @@ const Header =() =>{
                 </li>
               </ul>
               <div className="shopping">
-                <span id="shop" class="material-icons md-48">shopping_cart</span>
+                <Link to="/cart"><span id="shop" class="material-icons md-48">shopping_cart</span></Link>
                 <span className="cart-count">{cart.length}</span>
               </div>
 

@@ -12,6 +12,7 @@ urlpatterns = [
     path('get-all-categories/', views.get_all_categories),
     path('filter/<int:catid>/<int:gendid>/', views.filter_cate),
     path('get-product/<int:prodid>/', views.get_one_item),
+    path('get-sizes/', views.get_sizes),
     path('register/', views.CustomUserCreate.as_view(), name="create_user"),
 
 ]

@@ -1,0 +1,36 @@
+.productss {
+  flex-flow: row wrap;
+  display: flex;
+  margin: 10px;
+  justify-content: space-between;
+  align-content: flex-start;
+}
+
+.list-prods {
+  width: 20%;
+  flex-grow: 0;
+  flex-shrink: 0;
+  border: 1px silver solid;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 15px;
+}
+
+img {
+  border-radius: 2px;
+}
+
+.product-info {
+  font-size: medium;
+  vertical-align: middle;
+  justify-content: space-around;
+  align-items: flex-start;
+  display: flex;
+}
+.material-icons {
+  vertical-align: middle;
+}
+
+.item-cart {
+  margin: 1%;
+}
