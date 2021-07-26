@@ -7,6 +7,10 @@ const Cart = () =>{
     const totalItems = cart.reduce((acc, curr) => acc + curr.product_qty, 0 )
     const totalPriceStr = totalPrice.toFixed(2)
 
+    const deleteItem = (idx1) =>{
+       setCart(cart.filter((currItem, idx)=> idx !== idx1 ))
+    }
+
     return (
         <>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link>
@@ -16,7 +20,7 @@ const Cart = () =>{
             </div>
             <div className="items">
                 <ul className="productss"> 
-                {cart.map((currItem) =>{
+                {cart.map((currItem, idx1) =>{
                     
                     if(cart.length >= 1){
                         return <>
@@ -32,7 +36,7 @@ const Cart = () =>{
                               <div className="item-cart">Size: <b>{currItem.product_size}</b></div>
                               <div className="item-cart">Qty: <b>{currItem.product_qty}</b></div>  
                               <div className="item-cart"><span class="material-icons">edit</span></div>
-                              <div className="item-cart"> <span id="delete" class="material-icons">delete</span></div></p>
+                              <div className="item-cart"> <span id="delete" class="material-icons" onClick={()=>deleteItem(idx1)}>delete</span></div></p>
                         </li>
                        </>
                     }
@@ -48,10 +52,6 @@ const Cart = () =>{
         
         </>
     )
-
-
-
-
 
 }
 

@@ -91,14 +91,14 @@ const ProductOverView = (props) => {
     const addToCart = (e) =>{
         e.preventDefault()
         console.log(formInfo)
-        if(formInfo.product_size === "" || formInfo.product_qty === ""){
-            return alert("Must Pick a Size")
+        if(formInfo.product_size === "" || formInfo.product_qty === ""){        
+            document.getElementById('alert').style.display = "block"
+            return null
         }
         setCart(curr => [...curr, {...formInfo}])
     }
 
     const triggerRender = (id)=>{
-
         axios.get("http://localhost:8000/api/get-product/" + id + "/",)
         .then(res =>{
             setProduct(res.data)
@@ -110,13 +110,20 @@ const ProductOverView = (props) => {
                 product_total_price:"",
                 product_img: "",
                 product_qty:"",
-                product_size:"",})
+                product_size:"",
+                product_total_price: 0
+            })
             
         }).catch(err => console.log(err))
     }
 
+    const closeAlert = () =>{
+        document.getElementById('alert').style.display = "none"
+    }
+
     return (
         <>
+
             <div>
                 <h2>{product.name}</h2>
             </div>
@@ -133,6 +140,10 @@ const ProductOverView = (props) => {
                     <p>{product.description}</p>
                     <div>
                         <hr></hr>
+                        <div className="alert alert-warning .alert-dismissible" role="alert"  id="alert">
+                            Please select a <b>size</b> and <b>quantity</b> before adding to your cart.
+                            <span className="close" onClick={closeAlert}>X</span>
+                        </div>
                         <h4>{product.name}</h4>
                         <h4>Price: ${product.price}</h4>
                         <form onSubmit={addToCart}>
@@ -142,7 +153,7 @@ const ProductOverView = (props) => {
                             {quanities.map((currentItem, idx)=>{
                                 return <>
                                 <div className="sizes">
-                                <input type="radio" id={currentItem.name} name="product_qty" value={currentItem.id} key={currentItem.id} onChange={changeHandler}/>
+                                <input className="sel-radio" type="radio" id={currentItem.name} name="product_qty" value={currentItem.id} key={currentItem.id} onChange={changeHandler}/>
                                 <label for={currentItem.id}>{currentItem.id}</label>
                                 </div>
                                 </>
