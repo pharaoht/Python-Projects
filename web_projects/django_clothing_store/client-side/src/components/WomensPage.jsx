@@ -91,9 +91,8 @@ const WomensPage = () =>{
                         {allProducts.map((currentItem) =>{
 
                             return <li className="list-prod" key={currentItem.id}>
-                                
                                 <div className="item">
-                                    <Link to={'/item/' + currentItem.id + '/' + currentItem.category.id + '/'}>
+                                    <Link to={'/item/' + currentItem.id + '/' + currentItem.category.id + '/' + currentItem.gender.id + '/'}>
                                     <div className="imageitem">
                                         <img src={'http://127.0.0.1:8000' + currentItem.photo1} alt="item" height="200" width="200" />
                                     </div>

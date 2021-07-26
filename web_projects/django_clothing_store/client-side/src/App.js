@@ -26,7 +26,7 @@ function App() {
         <Menpage path='/shop/men'></Menpage>
         <WomensPage path='/shop/women'></WomensPage>
         <AddProduct path='/admin/add-product'></AddProduct>
-        <ProductOverView path='/item/:id/:catid'></ProductOverView>
+        <ProductOverView path='/item/:id/:catid/:genid'></ProductOverView>
 
 
       </Router>

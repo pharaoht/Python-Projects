@@ -52,7 +52,7 @@ const Menpage = () =>{
     }
 
     const pagNext = (e, url) =>{
-        if(url == null || undefined){
+        if(url === null || undefined){
             return null
         }
         axios.get(url)
@@ -64,7 +64,7 @@ const Menpage = () =>{
     }
 
     const pagPrev = (e, url) =>{
-        if(url == null || undefined){
+        if(url === null || undefined){
             return null
         }
         axios.get(url)
@@ -95,11 +95,11 @@ const Menpage = () =>{
                     <ul className="products"> 
                         
                         {allProducts.map((currentItem) =>{
-
+                            console.log(currentItem)
                             return <li className="list-prod" key={currentItem.id}>
                                 
                                 <div className="item">
-                                    <Link to={'/item/' + currentItem.id + '/' + currentItem.category.id + '/'}>
+                                    <Link to={'/item/' + currentItem.id + '/' + currentItem.category.id + '/' + currentItem.gender.id + '/'}>
                                     <div className="imageitem">
                                         <img src={'http://127.0.0.1:8000' + currentItem.photo1} alt="item" height="200" width="200" />
                                     </div>
@@ -125,11 +125,6 @@ const Menpage = () =>{
      )
      
 }
-const mapStateToProps = state =>{
-    
-    return {
-        products: state.shop.products
-    }
-}
 
-export default connect(mapStateToProps)(Menpage);
+
+export default Menpage;
