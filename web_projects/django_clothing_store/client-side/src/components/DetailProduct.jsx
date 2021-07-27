@@ -126,6 +126,7 @@ const ProductOverView = (props) => {
 
             <div>
                 <h2>{product.name}</h2>
+             
             </div>
             <div className="main-holder">
                 <div className="img-info">

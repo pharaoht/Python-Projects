@@ -47,3 +47,7 @@ img {
   transition-duration: 0.2s;
   outline: none;
 }
+
+.cart-check {
+  text-align: center;
+}

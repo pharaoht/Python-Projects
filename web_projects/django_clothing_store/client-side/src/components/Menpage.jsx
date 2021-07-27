@@ -1,8 +1,9 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect,} from 'react'
+
 import axios from 'axios'
 import { Link} from '@reach/router'
 import '../css/Menspage.css';
-import {connect} from 'react-redux'
+
 
 
 
@@ -80,7 +81,8 @@ const Menpage = () =>{
      return (
          <>
             <div>
-                <h3>Men's Attire</h3>
+                <h3>Men's Attire </h3>
+             
             </div>
             <div className="main-holder">
                 <div className="sidebar">
@@ -93,8 +95,9 @@ const Menpage = () =>{
                 </div>
                 <div className="main-container">
                     <ul className="products"> 
-                        
-                        {allProducts.map((currentItem) =>{
+                        {allProducts.length == 0 ? <><h3>No items yet, we will add some soon...</h3></>
+                        : 
+                        allProducts.map((currentItem) =>{
                             console.log(currentItem)
                             return <li className="list-prod" key={currentItem.id}>
                                 

@@ -1,6 +1,7 @@
 import React, {useContext} from 'react'
 import {CartContext} from '../components/CartContext'
 import '../css/Cart.css';
+
 const Cart = () =>{
     const [cart, setCart] = useContext(CartContext)
     const totalPrice = cart.reduce((acc, curr)=> (acc + curr.product_total_price * 100 / 100), 0)
@@ -11,6 +12,7 @@ const Cart = () =>{
        setCart(cart.filter((currItem, idx)=> idx !== idx1 ))
     }
 
+   
     return (
         <>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link>
@@ -20,8 +22,10 @@ const Cart = () =>{
             </div>
             <div className="items">
                 <ul className="productss"> 
-                {cart.map((currItem, idx1) =>{
-                    
+                {cart.length == 0 ? <><li> <h3>No items in your cart...</h3></li></>
+                : 
+                cart.map((currItem, idx1) =>{
+                     
                     if(cart.length >= 1){
                         return <>
                         <li className="list-prods" key={currItem.id}>
