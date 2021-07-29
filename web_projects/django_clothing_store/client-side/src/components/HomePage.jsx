@@ -7,7 +7,8 @@ import photo3 from '../media/suit-unsplash.jpg'
 import photo4 from '../media/suit.jpg'
 import photo5 from '../media/women-suit.jpg'
 import photo6 from '../media/group.jpg'
-
+import photo7 from '../media/suit.png'
+import photo8 from '../media/guy-in-suit.jpg'
 
 
 const HomePage = () =>{
@@ -48,18 +49,18 @@ const HomePage = () =>{
                     <Link to="/shop/men">
                     <div className="box" id="men-photo">
                         <i>Men</i>
-                        <img src={photo4}height="350" width="350"/>
+                        <img className="img-home" src={photo4}/>
                     </div>
                     </Link>
                     <Link to='/shop/women'>
                     <div className="iwomen">
                         <i>Women</i>
-                        <img src={photo5} height="350" width="350" />
+                        <img className="img-home" src={photo5}/>
                     </div>
                     </Link>
                     <div className="box">
                         <i>Sale</i>
-                        <img src={photo6} height="350" width="350" />
+                        <img className="img-home" src={photo6}/>
                     </div>
                 </div>
             </div>
@@ -69,7 +70,18 @@ const HomePage = () =>{
                 <h1>See What is New</h1>
                 <hr></hr>
                 <div className="new-section">
-
+                    <div className="photo2-div">
+                        <Link to='/shop/new-arrivals'>
+                        <i>New</i>
+                        <img className="photo2" src={photo8}/>
+                        </Link>
+                    </div>
+                    <div className="photo1-div">
+                        <Link to='/shop/new-arrivals'>
+                        <i>Arrivals</i>
+                        <img className="photo1" src={photo7}/>
+                        </Link>
+                    </div>
                 </div>
             </div>
       </>

@@ -26,9 +26,10 @@ h1 {
 .selection {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 .box {
-  height: 350px;
+  height: auto;
   width: 350px;
   background-color: silver;
 }
@@ -82,5 +83,82 @@ div.iwomen i {
 
 div.iwomen:hover i {
   transform: translate(140%, 200%) scale(2);
+  transition: transform 300ms 100ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.img-home {
+  max-width: 100%;
+  height: auto;
+}
+
+.new-section {
+  display: flex;
+  justify-content: space-between;
+}
+
+.photo1-div {
+  width: 65%;
+  height: auto;
+  background-color: silver;
+}
+.photo1 {
+  width: 100%;
+  height: 100%;
+}
+
+div.photo1-div:hover img {
+  opacity: 0.3;
+}
+
+div.photo1-div * {
+  transition: all 0.2s ease-in-out;
+}
+
+div.photo1-div i {
+  position: absolute;
+  font-size: 34px;
+  color: black;
+  width: auto;
+  height: auto;
+  line-height: 60px;
+  transform: translate(270%, 290%) scale(0);
+}
+
+div.photo1-div:hover i {
+  transform: translate(270%, 290%) scale(2);
+  transition: transform 300ms 100ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.photo2-div {
+  width: 30%;
+  height: auto;
+  background-color: silver;
+}
+
+.photo2 {
+  width: 100%;
+  height: 100%;
+}
+
+div.photo2-div:hover img {
+  opacity: 0.3;
+}
+
+div.photo2-div * {
+  transition: all 0.2s ease-in-out;
+}
+
+div.photo2-div i {
+  position: absolute;
+  font-size: 34px;
+  color: black;
+  width: auto;
+  height: auto;
+  line-height: 60px;
+  transform: translate(200%, 290%) scale(0);
+}
+
+div.photo2-div:hover i {
+  transform: translate(200%, 290%) scale(2);
   transition: transform 300ms 100ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }

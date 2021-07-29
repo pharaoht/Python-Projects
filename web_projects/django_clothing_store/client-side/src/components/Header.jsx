@@ -24,6 +24,7 @@ const Header =() =>{
         first_name:'',
         last_name:'',
         password:'',
+        password2:'',
       });
 
       const [formData, updatedFormData] = useState(initialFormData)
@@ -51,20 +52,21 @@ const Header =() =>{
         e.preventDefault();
         console.log(formData)
 
-        axiosInstance
-        .post(`register/`, {
+        axios.post(`http://localhost:8000/api/register-user/`, {
             email:formData.email,
             password:formData.password,
+            password2:formData.password2,
             first_name:formData.first_name,
             last_name:formData.last_name
             
         })
         .then((res) =>{
+          console.log(res)
           setmodalIsOpen(false)
             history.push('/')
             
         }).catch(err =>{
-          setFormErrors(err.response.data)
+          setFormErrors(err.response)
           console.log(formErrors)
         } )}
   return (
@@ -96,16 +98,16 @@ const Header =() =>{
                   <Link className="nav-link" to="/shop/women">Women</Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" to="#">New Arrivals</Link>
+                  <Link className="nav-link" to="/shop/new-arrivals">New Arrivals</Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" to="#">Full Suits</Link>
+                  <Link className="nav-link" to="/shop/full-suits">Full Suits</Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" to="#">On Sale</Link>
+                  <Link className="nav-link" to="/shop/sales">On Sale</Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" to="#">About Us</Link>
+                  <Link className="nav-link" to="/about-us">About Us</Link>
                 </li>
               </ul>
               <div className="shopping">
@@ -131,6 +133,8 @@ const Header =() =>{
                 <input type='text' className="form-input" name="email" onChange={handleChange}/>
                 <p className="sign-up-text">Password</p>
                 <input type='text' className="form-input" name="password" onChange={handleChange}/>
+                <p className="sign-up-text">Confirm Password</p>
+                <input type='text' className="form-input" name="password2" onChange={handleChange}/>
                 <p><button type="submit" className="submit-btn" onClick={handleSumbit}>Sign Up!</button></p>
                 
               </form>

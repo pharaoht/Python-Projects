@@ -10,6 +10,10 @@ import WomensPage from './components/WomensPage';
 import Footer from './components/Footer';
 import {CartProvider } from './components/CartContext'
 import Cart from './components/Cart';
+import NewArrivals from './components/NewArrivals';
+import FullSuits from './components/FullSuits';
+import SalePage from './components/SalePage';
+import AboutUs from './components/AboutUs';
 
 
 function App() {
@@ -25,8 +29,12 @@ function App() {
         <Cart path='/cart'></Cart>
         <Menpage path='/shop/men'></Menpage>
         <WomensPage path='/shop/women'></WomensPage>
+        <FullSuits path='/shop/full-suits'></FullSuits>
+        <NewArrivals path='/shop/new-arrivals'></NewArrivals>
+        <SalePage path='/shop/sales'></SalePage>
         <AddProduct path='/admin/add-product'></AddProduct>
         <ProductOverView path='/item/:id/:catid/:genid'></ProductOverView>
+        <AboutUs path='/about-us'></AboutUs>
 
 
       </Router>
