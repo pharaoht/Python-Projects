@@ -2,7 +2,6 @@
   flex-flow: row wrap;
   display: flex;
   align-content: flex-start;
-  justify-content: space-between;
 }
 
 .list-prods {
@@ -71,4 +70,13 @@ img {
   transition-duration: 0.2s;
   outline: none;
   color: cadetblue;
+}
+
+@media (max-width: 990px) {
+  .productss {
+    flex-direction: column;
+  }
+  .list-prods {
+    width: 100%;
+  }
 }

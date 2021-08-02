@@ -1,6 +1,8 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+
 from phone_field import PhoneField
+from django.conf import settings
 
 # class Address(models.Model):
 #     address_line_1 = models.CharField(max_length=100)
@@ -14,20 +16,22 @@ from phone_field import PhoneField
 
 class UserManager(BaseUserManager):
 
-    def create_user(self, email, first_name, last_name, phone_number, **other_fields):
-        email = self.normalize_email(email)
-        user = self.model(email=email,
-                          first_name=first_name, last_name=last_name, phone_number=phone_number, **other_fields)
-        return user
-
-    def create_superuser(self, email, first_name, last_name, password, phone_number, **other_fields):
+    def create_superuser(self, email, first_name, password, **other_fields):
         other_fields.setdefault('is_staff', True)
+        print("hi")
         if other_fields.get('is_staff') is not True:
             raise ValueError('Admin user must be set to is_staff')
-        return self.create_user(email,  first_name, password, last_name, phone_number, **other_fields)
+        return self.create_user(email,  first_name, password, is_superuser=True, ** other_fields)
+
+    def create_user(self, email, first_name, last_name, **other_fields):
+
+        email = self.normalize_email(email)
+        user = self.model(email=email,
+                          first_name=first_name, last_name=last_name, **other_fields)
+        return user
 
 
-class NewUser(AbstractBaseUser):
+class NewUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True)
     first_name = models.CharField(max_length=150)
     last_name = models.CharField(max_length=150)
@@ -37,6 +41,15 @@ class NewUser(AbstractBaseUser):
     is_staff = models.BooleanField(default=False)
 
     objects = UserManager()
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['first_name']
+
+    def __str__(self):
+        return self.first_name
+
+    def has_perm(self, perm, obj=None):
+        return self.is_staff
 
 
 class Category(models.Model):

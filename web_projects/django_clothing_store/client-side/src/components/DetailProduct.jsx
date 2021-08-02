@@ -18,9 +18,10 @@ const ProductOverView = (props) => {
         product_img: "",
         product_qty:"",
         product_size:"",
+        product_id:"",
     })
     //make gender id dynamic
-    console.log(props.genid)
+    console.log(props)
     const gen = props.genid
 
     useEffect(()=>{
@@ -62,6 +63,7 @@ const ProductOverView = (props) => {
             setFormInfo({
                 ...formInfo,
                 [e.target.name]: intQty,
+                product_id: props.id,
                 product_name:product.name,
                 product_price: floatPrice, 
                 product_total_price: floatPrice * intQty,
@@ -73,7 +75,6 @@ const ProductOverView = (props) => {
                 [e.target.name]: e.target.value,
         })
         }
-
     }
 
     const imgChanger = (num) =>{

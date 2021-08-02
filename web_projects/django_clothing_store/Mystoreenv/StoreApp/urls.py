@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from .views import CustomUserCreate
 
 app_name = 'StoreApp'
 
@@ -14,6 +15,6 @@ urlpatterns = [
     path('get-product/<int:prodid>/', views.get_one_item),
     path('get-sizes/', views.get_sizes),
     path('get-quantities/', views.get_quantity),
-    path('register-user/', views.registration_view, name="create_user"),
+    path('register-user/', CustomUserCreate.as_view(), name="create_user"),
 
 ]

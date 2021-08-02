@@ -143,6 +143,12 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# Permissions
+# Allow any
+# IsAuthenticated
+# IsAdminUser
+# IsAuthenticatedOrReadOnly
+
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny',
@@ -152,7 +158,7 @@ REST_FRAMEWORK = {
     )
 }
 
-Auth_USER_MODEL = 'StoreApp.NewUser'
+AUTH_USER_MODEL = 'StoreApp.NewUser'
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),

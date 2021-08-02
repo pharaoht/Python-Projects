@@ -153,13 +153,15 @@ class CustomUserCreate(APIView):
     permission_classes = [AllowAny]
 
     def post(self, request):
+        print(request.data['email'])
         reg_serializer = UserSerializer(data=request.data)
-        print(request.data)
+
         if reg_serializer.is_valid():
             newuser = reg_serializer.save()
             if newuser:
-                return Response(status=status.HTTP_201_CREATED)
-        return Response(data=reg_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+                return Response(status=status.HTTP_201_CREATED,)
+        print(reg_serializer.errors)
+        return Response(status=status.HTTP_400_BAD_REQUEST, data=reg_serializer.errors)
 
 # class CreateProduct(APIView):
     #     permission_classes = [AllowAny]

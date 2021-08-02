@@ -12,73 +12,18 @@ import {CartContext} from '../components/CartContext'
 Modal.setAppElement('#root')
 const Header =() =>{
     const [cart, setCart] = useContext(CartContext)
-      const [modalIsOpen, setmodalIsOpen] = useState(false) 
-      const[formErrors, setFormErrors] = useState({
-       email: "",
-    })
       
-      const history = useHistory();
-      //object freeze, once the user submit info it cannot be changed
-      const initialFormData = Object.freeze({
-        email:'',
-        first_name:'',
-        last_name:'',
-        password:'',
-        password2:'',
-      });
-
-      const [formData, updatedFormData] = useState(initialFormData)
-
-      useEffect(()=>{
-        axios.get("http://localhost:8000/api/get-all-male-products/",{
-        })
-        .then(res=>{
-            console.log(res)
-        }).catch(err => {
-            setFormErrors(err.response)
-            
-        })
-      },[])
-
-      const handleChange = (e) => {
-        updatedFormData({
-            ...formData,
-            //Trimming any whitespace
-            [e.target.name]: e.target.value.trim(),
-        });
-      };
-
-      const handleSumbit = (e) =>{
-        e.preventDefault();
-        console.log(formData)
-
-        axios.post(`http://localhost:8000/api/register-user/`, {
-            email:formData.email,
-            password:formData.password,
-            password2:formData.password2,
-            first_name:formData.first_name,
-            last_name:formData.last_name
-            
-        })
-        .then((res) =>{
-          console.log(res)
-          setmodalIsOpen(false)
-            history.push('/')
-            
-        }).catch(err =>{
-          setFormErrors(err.response)
-          console.log(formErrors)
-        } )}
   return (
     <>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link>
     
            {/* add logic to show if user is logged in*/}
       <div className="user-login">
-
-        <button className="btn-none" onClick={() => setmodalIsOpen(true)}> Sign-up <span className="glyphicon glyphicon-plus-sign" ></span></button>
-        | 
-        <button className="btn-none"> Log in <span className="glyphicon glyphicon-user"></span>  </button>
+        <Link className="logo" to="/register">
+          Sign-up <span className="glyphicon glyphicon-plus-sign" ></span> |
+        </Link>
+        
+        <Link className="logo" to="/login"> Log in <span className="glyphicon glyphicon-user"></span>  </Link>
       </div>
 
       <div>
@@ -118,7 +63,7 @@ const Header =() =>{
         </nav>
       </div>
 
-      <Modal isOpen={modalIsOpen} onRequestClose={() => setmodalIsOpen(false)}>
+      {/* <Modal isOpen={modalIsOpen} onRequestClose={() => setmodalIsOpen(false)}>
         
           <div className="outline">
             <div className="sign-up">
@@ -162,7 +107,7 @@ const Header =() =>{
 
 
 
-      </Modal>
+      </Modal> */}
 
 
     

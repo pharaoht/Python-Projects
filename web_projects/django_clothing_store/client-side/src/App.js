@@ -14,8 +14,8 @@ import NewArrivals from './components/NewArrivals';
 import FullSuits from './components/FullSuits';
 import SalePage from './components/SalePage';
 import AboutUs from './components/AboutUs';
-
-
+import Register from './components/Register'
+import Login from './components/Login'
 function App() {
 
   return (      
@@ -35,7 +35,8 @@ function App() {
         <AddProduct path='/admin/add-product'></AddProduct>
         <ProductOverView path='/item/:id/:catid/:genid'></ProductOverView>
         <AboutUs path='/about-us'></AboutUs>
-
+        <Register path='/register'></Register>
+        <Login path='/login'></Login>
 
       </Router>
     </CartProvider>

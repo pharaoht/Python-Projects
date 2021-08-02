@@ -14,9 +14,11 @@ const Cart = () =>{
 
 
     const deleteItem = (idx1) =>{
+
        setCart(cart.filter((currItem, idx)=> idx !== idx1 ))
     }
     useEffect(() => {
+        setDeleteState(false)
         axios.get("http://localhost:8000/api/get-sizes/")
             .then(res => {
                 setSizes(res.data)
@@ -26,10 +28,10 @@ const Cart = () =>{
     }, [deleteState])
 
     const editqty = (id) =>{
-        
+
        let qtyNumber = document.getElementById(id)
        let qtyInput =  document.getElementById(id + "input")
-       qtyInput.value = ""
+
         if( qtyInput.style.display == "none"){
             qtyInput.style.display = "inline"
             qtyNumber.style.display = "none"
@@ -44,42 +46,20 @@ const Cart = () =>{
 
     const updateQty = (e, id)=>{
         let intQty = parseInt(e.target.value)
-        console.log(cart)
-        cart.map((currentItem, idx)=>{
-            if(idx === id){
-                setCart(curr =>
-                     [...curr, {
-                    product_img: cart[id].product_img,
-                    product_name: cart[id].product_name,
-                    product_price: cart[id].product_price,
-                    product_qty: intQty,
-                    product_size: cart[id].product_size,
-                    product_total_price: cart[id].product_price * intQty,
-                
-                }])
-            }
-            
-        })
-       
+        let items = [...cart]
+        let item = {...items[id]}
+        item.product_qty = intQty
+        item.product_total_price = intQty * item.product_price
+        cart[id] = item
+        setDeleteState(true)
 
-        let fdf = {
-            product_img: cart[id].product_img,
-            product_name: cart[id].product_name,
-            product_price: cart[id].product_price,
-            product_qty: intQty,
-            product_size: cart[id].product_size,
-            product_total_price: cart[id].product_price * intQty,
-        }
-
-       
-        
     }
 
     return (
         <>
        
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link>
-        <div className="main" onClick={()=>{}}>
+        <div className="main">
             <div className="header">
                 <h3>Your Cart</h3>
             </div>
@@ -91,7 +71,7 @@ const Cart = () =>{
                      
                     if(cart.length >= 1){
                         return <>
-                        <li className="list-prods" key={currItem.id}>
+                        <li className="list-prods" key={currItem.product_id}>
                           <div className="photo-img-holder">
                               <img className="photo-img-cart" src={'http://127.0.0.1:8000' + currItem.product_img} alt="item"  />
                           </div>
@@ -106,12 +86,11 @@ const Cart = () =>{
                               </div>
                               <div className="item-cart">
                                   <div><span>Qty:</span></div>
+
                                   <div>
-                                      <b id={idx1}> {currItem.product_qty}</b>
-                                      <input max='5' min="0" onChange={(e)=>{updateQty(e,idx1)}} type="number" id={idx1 + "input"} style={{display:'none', width:'40px'}}/>
+                                      <b id={idx1 }> {currItem.product_qty}</b>
+                                      <input max='5' min="1" onChange={(e)=>{updateQty(e, idx1)}} type="number" id={idx1 + "input"} style={{display:'none', width:'40px'}}/>
                                   </div>
-                                   
-                                
                                 
                             </div>  
                               <div className="item-cart"><span id="edit" class="material-icons" onClick={()=>editqty(idx1)}>edit</span></div>

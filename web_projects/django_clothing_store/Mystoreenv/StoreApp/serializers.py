@@ -14,7 +14,7 @@ from rest_framework.validators import UniqueValidator
 class UserSerializer(ModelSerializer):
     class Meta:
         model = NewUser
-        fields = ('first_name', 'last_name', 'email', 'password')
+        fields = ('first_name', 'email', 'password')
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
