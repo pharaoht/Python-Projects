@@ -16,12 +16,16 @@ import SalePage from './components/SalePage';
 import AboutUs from './components/AboutUs';
 import Register from './components/Register'
 import Login from './components/Login'
+import Logout from './components/Logout'
 function App() {
 
   return (      
    <div className="App container">
     <CartProvider>
-       <Header></Header>
+    
+          <Header></Header>
+     
+       
     
       <Router>
         
@@ -37,7 +41,7 @@ function App() {
         <AboutUs path='/about-us'></AboutUs>
         <Register path='/register'></Register>
         <Login path='/login'></Login>
-
+        <Logout path='logout'></Logout>
       </Router>
     </CartProvider>
       <Footer></Footer>

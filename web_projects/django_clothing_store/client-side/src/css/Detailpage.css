@@ -79,3 +79,47 @@
 .alert {
   display: none;
 }
+
+#success {
+  margin: 0%;
+  margin-left: 10px;
+  padding: 5px;
+}
+.close {
+  margin-left: 7px;
+}
+.button-holder {
+  display: flex;
+}
+
+@media (max-width: 990px) {
+  .more-images {
+    flex-direction: column;
+  }
+  .similar-items img {
+    width: 50%;
+  }
+  .form-holder {
+    display: flex;
+  }
+  .boxed {
+    flex-direction: column;
+  }
+
+  h4 {
+    text-align: center;
+  }
+  .img-info {
+    width: 100%;
+    display: flex;
+  }
+
+  .main-holder {
+    display: block;
+  }
+
+  .text-desc {
+    width: 100%;
+    display: flex;
+  }
+}

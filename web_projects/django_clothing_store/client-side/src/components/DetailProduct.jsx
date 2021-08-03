@@ -97,9 +97,12 @@ const ProductOverView = (props) => {
             return null
         }
         setCart(curr => [...curr, {...formInfo}])
+        document.getElementById('success').style.display = "block"
     }
 
     const triggerRender = (id)=>{
+        document.getElementById('alert').style.display = "none"
+        document.getElementById('success').style.display = "none"
         axios.get("http://localhost:8000/api/get-product/" + id + "/",)
         .then(res =>{
             setProduct(res.data)
@@ -120,6 +123,7 @@ const ProductOverView = (props) => {
 
     const closeAlert = () =>{
         document.getElementById('alert').style.display = "none"
+        document.getElementById('success').style.display = "none"
     }
 
     return (
@@ -149,36 +153,45 @@ const ProductOverView = (props) => {
                         <h4>{product.name}</h4>
                         <h4>Price: ${product.price}</h4>
                         <form onSubmit={addToCart}>
-                        <div className="size-holder">
-                            <h4>Quantity:</h4>
-                            <div className="boxed">
-                            {quanities.map((currentItem, idx)=>{
-                                return <>
-                                <div className="sizes">
-                                <input className="sel-radio" type="radio" id={currentItem.name} name="product_qty" value={currentItem.id} key={currentItem.id} onChange={changeHandler}/>
-                                <label for={currentItem.id}>{currentItem.id}</label>
-                                </div>
+                        <div className="form-holder">
+                            <div className="size-holder">
+                                <h4>Quantity:</h4>
+                                <div className="boxed">
+                                {quanities.map((currentItem, idx)=>{
+                                    return <>
+                                    <div className="sizes">
+                                    <input className="sel-radio" type="radio" id={currentItem.name} name="product_qty" value={currentItem.id} key={currentItem.id} onChange={changeHandler}/>
+                                    <label for={currentItem.id}>{currentItem.id}</label>
+                                    </div>
                                 </>
-                            })}
+                                 })}
+                                </div>
                             </div>
-                        </div>
 
 
-                        <div className="size-holder">
-                            <h4>Size:</h4>
-                            <div className="boxed">
-                            {sizes.map((currentItem, idx)=>{
-                                return <>
-                                <div className="sizes">
-                                <input type="radio" name="product_size"  key={currentItem.name} id={currentItem.name} value={currentItem.name} onChange={changeHandler}/>
-                                <label for={currentItem.name}>{currentItem.name}</label>
+                            <div className="size-holder">
+                                <h4>Size:</h4>
+                                <div className="boxed">
+                                {sizes.map((currentItem, idx)=>{
+                                    return <>
+                                    <div className="sizes">
+                                    <input type="radio" name="product_size"  key={currentItem.name} id={currentItem.name} value={currentItem.name} onChange={changeHandler}/>
+                                    <label for={currentItem.name}>{currentItem.name}</label>
+                                    </div>
+                                    </>
+                                })}
                                 </div>
-                                </>
-                            })}
                             </div>
                         </div>
+                        <div className="button-holder">
+                            <button className="btn-primary btn" type="submit">Add to Cart!</button>
+                            <div className="alert alert-success" role="alert" id="success">
+                                <b>{product.name}</b> Has been added to your cart
+                                <span className="close" onClick={closeAlert}> X </span>
+                            </div>
+                        </div>        
+
                         
-                        <button className="btn-primary btn" type="submit">Add to Cart!</button>
                         </form>
                         <hr></hr>
                         <h4>Similar Items:</h4>

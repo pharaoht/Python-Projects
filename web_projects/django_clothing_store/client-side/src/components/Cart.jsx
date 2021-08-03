@@ -31,6 +31,7 @@ const Cart = () =>{
 
        let qtyNumber = document.getElementById(id)
        let qtyInput =  document.getElementById(id + "input")
+       qtyInput.value = cart[id].product_qty
 
         if( qtyInput.style.display == "none"){
             qtyInput.style.display = "inline"

@@ -12,18 +12,33 @@ import {CartContext} from '../components/CartContext'
 Modal.setAppElement('#root')
 const Header =() =>{
     const [cart, setCart] = useContext(CartContext)
+  
+    const [jwttoken, setjwtToken] = useState()
+
+    useEffect(() => {
+     
+        console.log(jwttoken)
+        setjwtToken(localStorage.access_token) 
+        console.log("hi")
+      
+     
+
+    }, [])
       
   return (
     <>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link>
     
-           {/* add logic to show if user is logged in*/}
+           {/* add logic to show if user is logged in*/ }
       <div className="user-login">
-        <Link className="logo" to="/register">
+        {jwttoken == null ? <> 
+          <Link className="logo" to="/register">
           Sign-up <span className="glyphicon glyphicon-plus-sign" ></span> |
         </Link>
         
-        <Link className="logo" to="/login"> Log in <span className="glyphicon glyphicon-user"></span>  </Link>
+        <Link className="logo" to="/login"> Log in <span className="glyphicon glyphicon-user"></span>  </Link></>
+        : <Link to="/logout">Logout</Link>}
+
       </div>
 
       <div>

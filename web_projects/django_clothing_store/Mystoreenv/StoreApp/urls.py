@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-from .views import CustomUserCreate
+from .views import CustomUserCreate, BlacklistTokenView
 
 app_name = 'StoreApp'
 
@@ -16,5 +16,7 @@ urlpatterns = [
     path('get-sizes/', views.get_sizes),
     path('get-quantities/', views.get_quantity),
     path('register-user/', CustomUserCreate.as_view(), name="create_user"),
+    path('logout/blacklist/', BlacklistTokenView.as_view(), name="blacklist"),
+    path('login/', views.login_view),
 
 ]

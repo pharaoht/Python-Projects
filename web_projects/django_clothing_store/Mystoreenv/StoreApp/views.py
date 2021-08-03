@@ -8,6 +8,7 @@ from rest_framework.permissions import AllowAny, IsAuthenticatedOrReadOnly
 from rest_framework import viewsets
 from django.shortcuts import get_object_or_404
 from rest_framework.pagination import PageNumberPagination
+from rest_framework_simplejwt.tokens import RefreshToken
 
 
 @ api_view(['POST', ])
@@ -126,26 +127,28 @@ def get_quantity(reqest):
     return Response(serializer.data)
 
 
-@api_view(['POST'])
-def registration_view(request):
+# @api_view(['POST'])
+# def registration_view(request):
 
-    if request.method == 'POST':
-        serializer = RegistrationSerializer(data=request.data)
-        data = {}
-        if serializer.is_valid():
-            user = serializer.save()
-            data['user'] = request.session['loggedInUser'] = user.id
-            data['first_name'] = user.first_name
-            data['email'] = user.email
-            data['last_name'] = user.last_name
-        else:
-            return Response(status=status.HTTP_400_BAD_REQUEST, data=serializer.errors)
-        return Response(status=status.HTTP_201_CREATED, data=data)
+#     if request.method == 'POST':
+#         serializer = RegistrationSerializer(data=request.data)
+#         data = {}
+#         if serializer.is_valid():
+#             user = serializer.save()
+#             data['user'] = request.session['loggedInUser'] = user.id
+#             data['first_name'] = user.first_name
+#             data['email'] = user.email
+#             data['last_name'] = user.last_name
+#         else:
+#             return Response(status=status.HTTP_400_BAD_REQUEST, data=serializer.errors)
+#         return Response(status=status.HTTP_201_CREATED, data=data)
 
 
 @api_view(['POST'])
 def login_view(request):
-    return Response()
+    print(request)
+    data = request
+    return Response(status=status.HTTP_201_CREATED, data=data)
 # Response(data, status=None, template_name=None, headers=None, content_type=None)
 
 
@@ -162,6 +165,20 @@ class CustomUserCreate(APIView):
                 return Response(status=status.HTTP_201_CREATED,)
         print(reg_serializer.errors)
         return Response(status=status.HTTP_400_BAD_REQUEST, data=reg_serializer.errors)
+
+
+class BlacklistTokenView(APIView):
+    permission_classes = [AllowAny]
+
+    def post(self, request):
+        try:
+            refresh_token = request.data['refresh_token']
+            token = RefreshToken(refresh_token)
+            token.blacklist()
+        except Exception as e:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+        return Response(status=status.HTTP_201_CREATED)
+
 
 # class CreateProduct(APIView):
     #     permission_classes = [AllowAny]

@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'StoreApp',
     'phone_field',
+    'rest_framework_simplejwt.token_blacklist',
 ]
 
 MIDDLEWARE = [

@@ -13,6 +13,9 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import {UserContext} from '../components/CartContext'
+
+
 
 const useStyles = makeStyles((theme) => ({
 	paper: {
@@ -61,7 +64,7 @@ export default function SignUp() {
 		console.log(formData);
 
 		axiosInstance
-			.post(`/api/register-user/`, {
+			.post(`register-user/`, {
 				email: formData.email,
 				first_name: formData.first_name,
 				password: formData.password,

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axiosInstance from '../axios';
 import { useHistory } from 'react-router-dom';
 //MaterialUI
@@ -13,6 +13,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+
 
 const useStyles = makeStyles((theme) => ({
 	paper: {
@@ -35,7 +36,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SignIn() {
-	const history = useHistory();
+    
+
 	const initialFormData = Object.freeze({
 		email: '',
 		password: '',
@@ -55,7 +57,7 @@ export default function SignIn() {
 		console.log(formData);
 
 		axiosInstance
-			.post(`api/token/`, {
+			.post(`token/`, {
 				email: formData.email,
 				password: formData.password,
 			})
@@ -64,10 +66,16 @@ export default function SignIn() {
 				localStorage.setItem('refresh_token', res.data.refresh);
 				axiosInstance.defaults.headers['Authorization'] =
 					'JWT ' + localStorage.getItem('access_token');
+                
+               
 				navigate("/")
-				//console.log(res);
-				//console.log(res.data);
-			});
+				// axiosInstance.post('api/login', {
+				// email: formData.email,
+				// password: formData.password,
+			    // }).then((res) => console.log(res))
+			}).catch((err) => console.log(err.response))
+              
+
 	};
 
 	const classes = useStyles();
