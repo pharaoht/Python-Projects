@@ -38,7 +38,6 @@ const useStyles = makeStyles((theme) => ({
 
 const SignIn = () => {
 	const {user, setUser} = useContext(UserContext)
-
 	const initialFormData = Object.freeze({
 		email: '',
 		password: '',
@@ -54,6 +53,7 @@ const SignIn = () => {
 	};
 
 	const handleSubmit = async (e) => {
+		
 		e.preventDefault();
 		console.log(formData);
 		
@@ -74,9 +74,14 @@ const SignIn = () => {
 					email: formData.email,
 					password: formData.password,
 				}).then((res) => {
-					console.log(res.data)
+					localStorage.setItem('email', res.data[0].email);
+					localStorage.setItem('first_name', res.data[0].first_name);
+					localStorage.setItem('last_name', res.data[0].last_name);
+					localStorage.setItem('phone_number', res.data[0].phone_number);
+					localStorage.setItem('id', res.data[0].id);
+					
 					navigate("/")
-					return res.data
+
 
 					
 				})

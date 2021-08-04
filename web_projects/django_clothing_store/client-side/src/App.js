@@ -19,14 +19,14 @@ import Login from './components/Login'
 import Logout from './components/Logout'
 import { UserContext } from './components/UserContext';
 function App() {
-  const [user, setUser] = useState("hello")
+  const [user, setUser] = useState(null)
  
 
 
   return (      
    <div className="App container">
     <CartProvider>
-      <UserContext.Provider value={{user, setUser}}>
+      <UserContext.Provider value={[user, setUser]}>
         <Header></Header>
      
           

@@ -14,35 +14,35 @@ Modal.setAppElement('#root')
 const Header =() =>{
     const [cart, setCart] = useContext(CartContext)
     const {user, setUser} = useContext(UserContext)
-    const [jwttoken, setjwtToken] = useState()
-
+    const [jwttoken, setjwtToken] = useState(false)
+    
     useEffect(() => {
-     
-        console.log(jwttoken)
-        setjwtToken(localStorage.access_token) 
-        console.log("hi")
+
+        setjwtToken(false ) 
+        console.log(localStorage.access_token)
       
      
 
-    }, [])
+    }, [user])
       
   return (
     <>
+    
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link>
     
            {/* add logic to show if user is logged in*/ }
-      <div className="user-login">
-        {jwttoken == null ? <> 
+      <div className="user-login" >
+        {localStorage.access_token == null ? <> 
           <Link className="logo" to="/register">
           Sign-up <span className="glyphicon glyphicon-plus-sign" ></span> |
         </Link>
         
         <Link className="logo" to="/login"> Log in <span className="glyphicon glyphicon-user"></span>  </Link></>
-        : <><span>Hello, {user}</span> <Link to="/logout">Logout</Link></>}
+        : <><span>Hello, {localStorage.first_name}</span> | <Link to="/logout">Logout</Link></>}
 
       </div>
 
-      <div>
+      <div onClick={() => setjwtToken(true)}>
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
           <Link className="logo" to="/">
              <img src={logo} width="165" height="50" class="d-inline-block " alt="logo"></img>

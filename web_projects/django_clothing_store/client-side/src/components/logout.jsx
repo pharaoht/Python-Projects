@@ -15,6 +15,8 @@ export default function SignUp() {
 		localStorage.removeItem('email');
 		localStorage.removeItem('first_name');
 		localStorage.removeItem('last_name');
+		localStorage.removeItem('phone_number');
+		localStorage.removeItem('id');
 		axiosInstance.defaults.headers['Authorization'] = null;
 		navigate('/')
 	});
