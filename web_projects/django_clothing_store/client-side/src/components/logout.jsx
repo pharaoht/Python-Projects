@@ -12,6 +12,9 @@ export default function SignUp() {
 		})
 		localStorage.removeItem('access_token');
 		localStorage.removeItem('refresh_token');
+		localStorage.removeItem('email');
+		localStorage.removeItem('first_name');
+		localStorage.removeItem('last_name');
 		axiosInstance.defaults.headers['Authorization'] = null;
 		navigate('/')
 	});

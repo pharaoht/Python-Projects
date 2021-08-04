@@ -1,7 +1,7 @@
 from rest_framework import status, generics
 from rest_framework.response import Response
 from .models import NewUser, Category, Product, Gender, Size, Quantity
-from .serializers import UserSerializer, ProductSerializer, CategorySerializer, GenderSerializer, SizeSerializer, QuantitySerializer, RegistrationSerializer
+from .serializers import UserSerializer, ProductSerializer, CategorySerializer, GenderSerializer, SizeSerializer, QuantitySerializer, RegistrationSerializer, LoginUserSerializer
 from rest_framework.decorators import api_view
 from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny, IsAuthenticatedOrReadOnly
@@ -127,28 +127,34 @@ def get_quantity(reqest):
     return Response(serializer.data)
 
 
-# @api_view(['POST'])
-# def registration_view(request):
+@api_view(['POST'])
+def registration_view(request):
 
-#     if request.method == 'POST':
-#         serializer = RegistrationSerializer(data=request.data)
-#         data = {}
-#         if serializer.is_valid():
-#             user = serializer.save()
-#             data['user'] = request.session['loggedInUser'] = user.id
-#             data['first_name'] = user.first_name
-#             data['email'] = user.email
-#             data['last_name'] = user.last_name
-#         else:
-#             return Response(status=status.HTTP_400_BAD_REQUEST, data=serializer.errors)
-#         return Response(status=status.HTTP_201_CREATED, data=data)
+    if request.method == 'POST':
+        serializer = RegistrationSerializer(data=request.data)
+        data = {}
+        if serializer.is_valid():
+            user = serializer.save()
+            data['user'] = request.session['loggedInUser'] = user.id
+            data['first_name'] = user.first_name
+            data['email'] = user.email
+            data['last_name'] = user.last_name
+        else:
+            return Response(status=status.HTTP_400_BAD_REQUEST, data=serializer.errors)
+        return Response(status=status.HTTP_201_CREATED, data=data)
 
 
 @api_view(['POST'])
 def login_view(request):
-    print(request)
-    data = request
-    return Response(status=status.HTTP_201_CREATED, data=data)
+
+    try:
+        user = NewUser.objects.filter(email=request.data['email'])
+        serializer = LoginUserSerializer(user, many=True)
+    except:
+        return Response(status=status.HTTP_400_BAD_REQUEST, data=serializer.errors)
+    return Response(status=status.HTTP_200_OK, data=serializer.data)
+
+
 # Response(data, status=None, template_name=None, headers=None, content_type=None)
 
 

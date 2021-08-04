@@ -26,6 +26,12 @@ class UserSerializer(ModelSerializer):
         return instance
 
 
+class LoginUserSerializer(ModelSerializer):
+    class Meta:
+        model = NewUser
+        fields = ['id', 'email', 'first_name', "last_name", 'phone_number']
+
+
 class CategorySerializer(ModelSerializer):
 
     class Meta:

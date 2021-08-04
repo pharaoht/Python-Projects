@@ -1,7 +1,7 @@
 import './App.css';
 import {Router, Link, Navigate} from '@reach/router';
 import Header from './components/Header';
-import  React, {useEffect, useState } from 'react';
+import  React, {useEffect, useState, useMemo, } from 'react';
 import AddProduct from './components/AddProduct';
 import Menpage from './components/Menpage';
 import HomePage from './components/HomePage';
@@ -17,13 +17,19 @@ import AboutUs from './components/AboutUs';
 import Register from './components/Register'
 import Login from './components/Login'
 import Logout from './components/Logout'
+import { UserContext } from './components/UserContext';
 function App() {
+  const [user, setUser] = useState("hello")
+ 
+
 
   return (      
    <div className="App container">
     <CartProvider>
-    
-          <Header></Header>
+      <UserContext.Provider value={{user, setUser}}>
+        <Header></Header>
+     
+          
      
        
     
@@ -43,6 +49,7 @@ function App() {
         <Login path='/login'></Login>
         <Logout path='logout'></Logout>
       </Router>
+       </UserContext.Provider>
     </CartProvider>
       <Footer></Footer>
      <br>

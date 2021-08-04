@@ -17,10 +17,7 @@ const HomePage = () =>{
     const[deleteState, setDeleteState] = useState(false)
 
   useEffect(() => {
-    axios.get("http://localhost:8000/api/get-all-t-shirts/")
-    .then(res =>{
-      console.log(res.data)
-    }) .catch(err => console.log(err))
+
   },[deleteState])
 
      return (

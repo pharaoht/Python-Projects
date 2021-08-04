@@ -13,7 +13,8 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-
+import axios from 'axios'
+import { UserContext } from './UserContext';
 
 const useStyles = makeStyles((theme) => ({
 	paper: {
@@ -35,8 +36,8 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-export default function SignIn() {
-    
+const SignIn = () => {
+	const {user, setUser} = useContext(UserContext)
 
 	const initialFormData = Object.freeze({
 		email: '',
@@ -52,28 +53,38 @@ export default function SignIn() {
 		});
 	};
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
 		console.log(formData);
-
+		
 		axiosInstance
 			.post(`token/`, {
 				email: formData.email,
 				password: formData.password,
-			})
-			.then((res) => {
+			}).then((res) => {
 				localStorage.setItem('access_token', res.data.access);
 				localStorage.setItem('refresh_token', res.data.refresh);
 				axiosInstance.defaults.headers['Authorization'] =
 					'JWT ' + localStorage.getItem('access_token');
-                
-               
-				navigate("/")
-				// axiosInstance.post('api/login', {
-				// email: formData.email,
-				// password: formData.password,
-			    // }).then((res) => console.log(res))
+
 			}).catch((err) => console.log(err.response))
+			
+			
+				axios.post(`http://localhost:8000/api/login/`, {
+					email: formData.email,
+					password: formData.password,
+				}).then((res) => {
+					console.log(res.data)
+					navigate("/")
+					return res.data
+
+					
+				})
+			
+
+		
+
+
               
 
 	};
@@ -123,7 +134,7 @@ export default function SignIn() {
 						variant="contained"
 						color="primary"
 						className={classes.submit}
-						onClick={handleSubmit}
+						onClick={handleSubmit} 
 					>
 						Sign In
 					</Button>
@@ -144,3 +155,4 @@ export default function SignIn() {
 		</Container>
 	);
 }
+export default SignIn;

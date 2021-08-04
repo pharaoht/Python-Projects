@@ -7,12 +7,13 @@ import  axiosInstance  from '../axios';
 import {useHistory} from 'react-router-dom';
 import axios from 'axios';
 import {CartContext} from '../components/CartContext'
+import { UserContext } from './UserContext';
 
 
 Modal.setAppElement('#root')
 const Header =() =>{
     const [cart, setCart] = useContext(CartContext)
-  
+    const {user, setUser} = useContext(UserContext)
     const [jwttoken, setjwtToken] = useState()
 
     useEffect(() => {
@@ -37,7 +38,7 @@ const Header =() =>{
         </Link>
         
         <Link className="logo" to="/login"> Log in <span className="glyphicon glyphicon-user"></span>  </Link></>
-        : <Link to="/logout">Logout</Link>}
+        : <><span>Hello, {user}</span> <Link to="/logout">Logout</Link></>}
 
       </div>
 
@@ -67,7 +68,7 @@ const Header =() =>{
                   <Link className="nav-link" to="/shop/sales">On Sale</Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" to="/about-us">About Us</Link>
+                  <Link className="nav-link" to="/about-us">About Us {user}</Link>
                 </li>
               </ul>
               <div className="shopping">
