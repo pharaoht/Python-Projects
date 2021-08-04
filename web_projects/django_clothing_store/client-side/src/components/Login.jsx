@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SignIn = () => {
-	const {user, setUser} = useContext(UserContext)
+	const [user, setUser] = useContext(UserContext)
 	const initialFormData = Object.freeze({
 		email: '',
 		password: '',
@@ -80,6 +80,8 @@ const SignIn = () => {
 					localStorage.setItem('phone_number', res.data[0].phone_number);
 					localStorage.setItem('id', res.data[0].id);
 					
+					setUser(["hi"])
+					
 					navigate("/")
 
 
@@ -91,7 +93,7 @@ const SignIn = () => {
 
 
               
-
+				
 	};
 
 	const classes = useStyles();

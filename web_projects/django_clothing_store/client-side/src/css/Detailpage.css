@@ -92,6 +92,10 @@
   display: flex;
 }
 
+.sm-imgs {
+  cursor: pointer;
+}
+
 @media (max-width: 990px) {
   .more-images {
     flex-direction: column;

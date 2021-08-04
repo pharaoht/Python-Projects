@@ -81,10 +81,24 @@ const ProductOverView = (props) => {
         console.log(product.category.id, product.gender.id )
         if(num === 3){
             document.getElementById('mainImg').src = `http://127.0.0.1:8000${product.photo3}`
+            document.getElementById('sm-3').style.border = "solid 1px dodgerblue"
+            document.getElementById('sm-3').style.borderRadius = '5px'
+            document.getElementById('sm-1').style.border = "none"
+            document.getElementById('sm-2').style.border = "none"
         }else if(num === 2){
             document.getElementById('mainImg').src = `http://127.0.0.1:8000${product.photo2}`
+            document.getElementById('sm-2').style.border = "solid 1px dodgerblue"
+            document.getElementById('sm-2').style.borderRadius = '5px'
+            document.getElementById('sm-1').style.border = "none"
+            document.getElementById('sm-3').style.border = "none"
+
         }else if(num === 1){
             document.getElementById('mainImg').src = `http://127.0.0.1:8000${product.photo1}`
+            document.getElementById('sm-1').style.border = "solid 1px dodgerblue"
+            document.getElementById('sm-1').style.borderRadius = '5px'
+            document.getElementById('sm-2').style.border = "none"
+            document.getElementById('sm-3').style.border = "none"
+
         }
         
     }
@@ -103,6 +117,9 @@ const ProductOverView = (props) => {
     const triggerRender = (id)=>{
         document.getElementById('alert').style.display = "none"
         document.getElementById('success').style.display = "none"
+        document.getElementById('sm-2').style.border = "none"
+        document.getElementById('sm-3').style.border = "none"
+        document.getElementById('sm-1').style.border = "none"
         axios.get("http://localhost:8000/api/get-product/" + id + "/",)
         .then(res =>{
             setProduct(res.data)
@@ -137,9 +154,9 @@ const ProductOverView = (props) => {
                 <div className="img-info">
                     <p><img className="main-img" src={'http://127.0.0.1:8000' + product.photo1} alt="item" height='500' id="mainImg"/></p>
                     <div className="more-images">
-                        <div ><img className="sm-imgs" src={'http://127.0.0.1:8000' + product.photo1} alt="item" height="100" width="100" onClick={(e)=> imgChanger(1)}/></div>
-                        <div >{product.photo2 ? <img className="sm-imgs" src={'http://127.0.0.1:8000' + product.photo2} alt="item" height="100" width="100" onClick={(e)=> imgChanger(2)}/>: null}</div>
-                        <div >{product.photo3 ? <img className="sm-imgs" src={'http://127.0.0.1:8000' + product.photo3} alt="item" height="100" width="100" onClick={(e)=> imgChanger(3)}/>: null}</div>
+                        <div id="sm-1"><img className="sm-imgs" src={'http://127.0.0.1:8000' + product.photo1} alt="item" height="100" width="100" onClick={(e)=> imgChanger(1)}/></div>
+                        <div id="sm-2">{product.photo2 ? <img className="sm-imgs" src={'http://127.0.0.1:8000' + product.photo2} alt="item" height="100" width="100" onClick={(e)=> imgChanger(2)}/>: null}</div>
+                        <div id="sm-3">{product.photo3 ? <img className="sm-imgs" src={'http://127.0.0.1:8000' + product.photo3} alt="item" height="100" width="100" onClick={(e)=> imgChanger(3)}/>: null}</div>
                     </div>
                 </div>
                 <div className="text-desc">
