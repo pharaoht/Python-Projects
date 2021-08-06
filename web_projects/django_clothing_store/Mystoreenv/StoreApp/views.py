@@ -155,6 +155,11 @@ def login_view(request):
     return Response(status=status.HTTP_200_OK, data=serializer.data)
 
 
+@api_view(['POST'])
+def wish_list(request):
+
+    pass
+
 # Response(data, status=None, template_name=None, headers=None, content_type=None)
 
 
