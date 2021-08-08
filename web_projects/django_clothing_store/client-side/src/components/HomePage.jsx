@@ -17,12 +17,14 @@ const HomePage = () =>{
     const[deleteState, setDeleteState] = useState(false)
 
   useEffect(() => {
-
+    setDeleteState(false)
   },[deleteState])
+
 
      return (
          <>
-            <div>
+         <div >
+            <div >
                 <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
@@ -38,7 +40,7 @@ const HomePage = () =>{
                 </div>
             </div>
 
-            <div>
+            <div > 
                 <hr></hr>
                 <h1>Revolutionize Your Look</h1>
                 <hr></hr>
@@ -81,6 +83,7 @@ const HomePage = () =>{
                     </div>
                 </div>
             </div>
+        </div>
       </>
 
      )

@@ -80,9 +80,9 @@ const SignIn = () => {
 					localStorage.setItem('phone_number', res.data[0].phone_number);
 					localStorage.setItem('id', res.data[0].id);
 					
-					setUser(["hi"])
 					
 					navigate("/")
+					
 
 
 					
@@ -92,8 +92,8 @@ const SignIn = () => {
 		
 
 
-              
-				
+        
+		
 	};
 
 	const classes = useStyles();

@@ -15,15 +15,19 @@ const Header =() =>{
     const [cart, setCart] = useContext(CartContext)
     const {user, setUser} = useContext(UserContext)
     const [jwttoken, setjwtToken] = useState(false)
+    const[deleteState, setDeleteState] = useState(false)
     
     useEffect(() => {
 
-        setjwtToken(false ) 
+        setDeleteState(false)
         console.log(localStorage.access_token)
       
      
 
-    }, [user])
+    }, [deleteState])
+
+  
+
       
   return (
     <>
@@ -42,7 +46,7 @@ const Header =() =>{
 
       </div>
 
-      <div onClick={() => setjwtToken(true)}>
+      <div onClick={() => setDeleteState(true)}>
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
           <Link className="logo" to="/">
              <img src={logo} width="165" height="50" class="d-inline-block " alt="logo"></img>

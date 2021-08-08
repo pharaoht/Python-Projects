@@ -18,7 +18,7 @@ export default function SignUp() {
 		localStorage.removeItem('phone_number');
 		localStorage.removeItem('id');
 		axiosInstance.defaults.headers['Authorization'] = null;
-		navigate('/')
+		window.location.href = '/';
 	});
 	return <div>Logout</div>;
 }
